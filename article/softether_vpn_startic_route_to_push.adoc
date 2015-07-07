@@ -1,4 +1,4 @@
-= 测试 SoftEther VPN
+= 试用 SoftEther VPN
 Google Plus <https://plus.google.com/u/0/+TerryZheng-404/posts[+Terry Zheng]>; Twitter <https://twitter.com/Gotnix[@Gotnix]>
 v0.1, 2016-07-06
 :lang: zh-cmn-Hans
@@ -38,7 +38,7 @@ ______
  - https://github.com/SoftEtherVPN/SoftEtherVPN/blob/master/src/Cedar/Server.c#L10777-L10828[论坛里提到的源代码]
 
 == 解决
-现在除了改源代码，不知道怎么解决。
+现在除了改源代码，不知道怎么解决。谁有更方便的办法请告诉我，比如在安装的时候加选项什么的。
 
 == 参考资源
  - [[[1]]] http://mawenjian.net/p/1281.html[SoftEther VPN——Linux下搭建VPN可以如此简单]
