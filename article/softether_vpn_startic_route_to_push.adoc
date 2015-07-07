@@ -31,7 +31,7 @@ ____
 ____
  - http://www.softether.org/5-download/history[Version History (ChangeLog) - SoftEther VPN 4.06 Build 9430 (Beta) (March 20, 2014)]
 +
-[quote, SoftEther VPN 4.06 Build 9430 (Beta) (March 20, 2014) ChangeLog]
+[quote, 'SoftEther VPN 4.06 Build 9430 (Beta) (March 20, 2014) ChangeLog']
 ______
 On VPN Servers in People's Republic of China, the above five functions are currently disabled by default, under the orders from Beijing. Although Chinese users can enable these functions manually, Enterprise users in People's Republic of China are recommended to use these enterprise functions with http://www.softether.cn/[PacketiX VPN Server 4.0 Chinese Edition].
 ______
