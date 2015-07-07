@@ -24,7 +24,17 @@ v0.1, 2016-07-06
 SoftEther VPN 支持常见的 VPN 类型^<<3>>^，所以这个需求很快就搞定了。就开始摸索推送路由的个功能，因为这个功能目前比较关键嘛。由于很易用的管理工具，找到这个功能配置还算容易，但是马上就发现被兲朝最大的组织坑了（不知道日本为什么也会有这个限制）。点确定会提示「不支持此功能。它尚未在 SoftEther VPN 的开源版本上实施」，于是Google之，结果如下：
 
  - http://www.vpnusers.com/viewtopic.php?f=7&t=2826&sid=127971784117c0fcdae4ab0248bfe40c#p6249[官方论坛讨论贴]
++
+[quote, samenlia]
+____
+你在天朝吧。
+____
  - http://www.softether.org/5-download/history[Version History (ChangeLog) - SoftEther VPN 4.06 Build 9430 (Beta) (March 20, 2014)]
++
+[quote, SoftEther VPN 4.06 Build 9430 (Beta) (March 20, 2014) ChangeLog]
+______
+On VPN Servers in People's Republic of China, the above five functions are currently disabled by default, under the orders from Beijing. Although Chinese users can enable these functions manually, Enterprise users in People's Republic of China are recommended to use these enterprise functions with http://www.softether.cn/[PacketiX VPN Server 4.0 Chinese Edition].
+______
  - https://github.com/SoftEtherVPN/SoftEtherVPN/blob/master/src/Cedar/Server.c#L10777-L10828[论坛里提到的源代码]
 
 == 解决
