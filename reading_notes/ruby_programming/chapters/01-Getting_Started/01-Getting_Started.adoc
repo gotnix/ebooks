@@ -1,0 +1,11 @@
+[[_Getting_Started]]
+=== 入门 | Getting Started
+'''
+
+在开始讨论之前，先安装 Ruby，便于边学习边运行代码。也会演示运行 Ruby 程序的几种不同的方式。
+
+include::sections/01-installing_ruby.adoc[]
+
+include::sections/02-running_ruby.adoc[]
+
+include::sections/03-ruby_documentation.adoc[]

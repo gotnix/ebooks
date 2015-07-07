@@ -1,0 +1,27 @@
+==== Ruby 是一门面向对象语言 | Ruby is an Object-Oriented Language
+
+
+[NOTE]
+面向对象和基于对象的编程语言是不一样的。
+
+Ruby 中需要定义**类**（class）来表示实体。类是状态（state）和使用这些状态的方法（method）的组合。
+一旦建立了类，通常要为每个类创建若干**实例**（instances）。**对象**（object）和
+**类的实例**（class instances）等同互用，因为 `object` 的长度更短，**对象**的使用频率可能更高。
+
+Ruby 通过调用**构造函数**（constructor）来创建对象，标准的构造函数是 `new`。
+
+[source,ruby]
+------
+song1 = Song.new("Ruby Tuesday")
+song2 = Song.new("Enveloped in Python")
+# and so on
+------
+
+`song1`、 `song2` 都是从 `Song` 这同一个类派生出来的，不过每个对象都各自特征：
+
+* **对象标识符**（object identifier，缩写为 object ID）
+* **实例变量**（instance variables），保存对象的状态（state）
+* **实例方法**（instance methods），每个方法都是一组功能，可以在类的内部或者从类的外部（依赖于访问约束）被调用。这些方法又会访问对象的实例变量及其状态。
+
+
+方法是通过向对象发送**消息**（message）来唤起调用的，对象作为**接收者**（receiver），后面跟一个点号「`.`」，再后面是被调用的方法。即 `对象.方法（参数）` 。

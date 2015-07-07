@@ -1,0 +1,33 @@
+==== 代码块和迭代器 | Blocks and Iterators
+
+
+[source,ruby]
+----
+{ puts "Hello"}          #  这行是 Block
+do                       ###
+  club.enrool(person)      #  这 4 行是一个 Block
+  person.socialize         #
+end                      ###
+----
+
+约定单行 Block 用 `{}`，多行 Block 用 `do/end`。`{}` 的优先级比 `do/end` 更高。
+
+[source,ruby]
+----
+def call_block
+  puts "Start of method"
+  yield
+  yield
+  puts "End of method"
+end
+
+call_block { puts "In the block" }
+----
+
+输出结果：
+....
+Start of method
+In the block
+In the block
+End of method
+....

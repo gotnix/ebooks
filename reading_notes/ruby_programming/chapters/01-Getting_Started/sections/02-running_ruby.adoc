@@ -1,0 +1,80 @@
+==== 运行 Ruby | Running Ruby
+
+
+===== 交互式 Ruby | Interactive Ruby
+* ruby
++
+[source,console]
+------
+$ ruby
+------
++
+[source,ruby]
+------
+puts "Hello, world!"
+^D
+# 输出：
+Hello, world!
+------
+
+* irb +
+对于大多数人，irb 是一个更友好的交互式 Ruby 执行环境。
++
+[source,console]
+------
+$ irb
+------
++
+[source,ruby]
+------
+2.1.4 :001 > def sum(n1, n2)
+2.1.4 :002?>   n1 + n2
+2.1.4 :003?>   end
+ => :sum
+2.1.4 :004 > sum(3, 4)
+ => 7
+2.1.4 :005 > sum("cat", "dog")
+ => "catdog"
+2.1.4 :006 >
+------
++
+irb 可以加载已经存在的 Ruby 程序，例：
++
+[source,ruby]
+------
+2.1.4 :001 > load "~/.rvm/src/ruby-2.1.4/sample/fib.rb"
+6765
+ => true
+2.1.4 :002 > fib(10)
+ => 55
+------
+
+===== Ruby 程序 | Ruby Programs
+
+打开编辑器，写入以下内容：
+[source,ruby]
+------
+#! /usr/local/bin/ruby -w
+puts "Hello, world!"
+------
+
+[TIP]
+shebang 另一种方式： +
+#！/usr/bin/env ruby
+
+
+保存退出，有 2 种执行方式：
+
+. 运行 Ruby 解释器，并以脚本文件名作为参数即可
++
+[source,console]
+------
+$ ruby myprog.rb
+------
+
+. 把脚本文件设为可执行文件（`chmod +x ./myprog.rb`）来运行
++
+[source,console]
+------
+$ ./myprog.rb
+------

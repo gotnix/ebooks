@@ -1,0 +1,33 @@
+==== 安装 Ruby | Installing Ruby
+
+
+如果你的系统已经安装了 Ruby，可以通过 `ruby -v` 确认安装的版本信息，比如：
+[source,console]
+------
+$ ruby -v
+ruby 2.1.4p265 (2014-10-27 revision 48166) [x86_64-linux]
+------
+
+===== 通过操作系统包管理工具安装
+|===
+|Linux 发行版|CentOS|openSUSE|Ubuntu
+|包管理命令|yum install ruby|zypper in ruby| aptitude install ruby
+|===
+
+===== 通过 https://rvm.io/[Ruby Version Manager] 安装
+[source,console]
+------
+$ \curl -sSL https://get.rvm.io | bash -s stable --ruby=2.1.4
+------
+
+可以通过 rvm 装文档，用法如下，详细的帮助信息可以运行 `rvm help docs` 查看。
+[source,console]
+------
+$ rvm docs {generate,generate-ri,generate-rdoc,generate-gems,rdoc_data}
+------
+
+我安装了 `ri` 和 `RDoc` 文档：
+[source,console]
+------
+$ rvm docs generate-ri generate-rdoc
+------

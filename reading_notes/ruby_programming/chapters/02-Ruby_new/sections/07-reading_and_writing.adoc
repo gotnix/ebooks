@@ -1,0 +1,16 @@
+==== 读/写文件 | Reading and 'Riting
+
+
+Ruby 有一个完备的 I/O 库。`puts` 和 `print` 都是输出自己的参数， `puts` 会在参数后面加上 `\n`，
+ `print` 则不会。这 2 个方法可以用来向任何 I/O 对象进行输出，默认情况下输出到标准输出。
+
+`printf` 是另一个常用的格式化输出方法，支持格式字符串：
+
+[source,ruby]
+------
+2.1.4 :001 > printf("Number: %5.2f, \nString: %s\n", 1.23, "hello")
+Number:  1.23,
+String: hello
+ => nil
+2.1.4 :002 >
+------

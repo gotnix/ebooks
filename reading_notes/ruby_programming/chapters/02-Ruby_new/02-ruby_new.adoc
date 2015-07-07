@@ -1,0 +1,25 @@
+=== Ruby.new | Ruby.new
+'''
+
+Ruby 是一门面向对象的编程语言，几乎所有东西都是对象；但是如果不知道字符串、流程控制语句、赋值以及
+其他语法细节，那么写一个类的示例代码都很困难。所以有了这一章，就想一本迷你教程，把各位引入到
+这本书的其他部分。
+
+include::sections/01-ruby_OOL.adoc[]
+
+include::sections/02-some_basic_ruby.adoc[]
+
+include::sections/03-array_and_hashe.adoc[]
+
+include::sections/04-control_structure.adoc[]
+
+include::sections/05-regexp.adoc[]
+
+include::sections/06-block_and_iterator.adoc[]
+
+include::sections/07-reading_and_writing.adoc[]
+
+
+==== 更高更远 | Onward and Upward
+
+下一章介绍 Ruby 的类和对象。

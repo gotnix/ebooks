@@ -1,0 +1,17 @@
+==== 正则表达式 | Regular Expressions
+
+
+[source,ruby]
+------
+File.open('./routines_2014-10-24_changed.sql').each do |line|
+  if ( line =~ /\p{Han}+/u and line =~ /CONCAT/ )
+    puts line
+  end
+end
+------
+
+[source,console]
+------
+ruby -ne 'puts $_ if ( $_ =~ /\p{Han}+/u and $_ =~ /CONCAT/ )' \
+routines_2014-10-24_changed.sql
+------

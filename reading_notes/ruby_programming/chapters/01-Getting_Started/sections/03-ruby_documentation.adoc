@@ -1,0 +1,8 @@
+==== Ruby 文档：RDoc 和 ri | Ruby documentation: RDoc and ri
+
+
+Ruby 有 2 种途径查看代码的文档， http://ruby-doc.org/[Ruby-Doc]  在线文档和 `ri` 命令。
+
+如果你不知需要查询的方法属于哪个类，可以直接把方法名作为参数通过 `ri` 查询， `ri` 会列出来所有可能包含
+这个方法的类。如果想让 `ri` 的输出有更多的颜色，可以试试 `--format ansi` 这个选项，更多帮助信息可以
+通过 `ri --help` 获得。
