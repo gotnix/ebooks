@@ -38,9 +38,25 @@ ______
  - https://github.com/SoftEtherVPN/SoftEtherVPN/blob/master/src/Cedar/Server.c#L10777-L10828[论坛里提到的源代码]
 
 == 解决
-现在除了改源代码，不知道怎么解决。谁有更方便的办法请告诉我，比如在安装的时候加选项什么的。
+试过修改系统变量 ${LANG}，把 SoftEther VPN 相关的 lang.conf、客户端的界面显示语言，全部改成英文，没有用。
+修改vpn_server.conf，
+[source, conf]
+------
+declare root
+{
+	uint ConfigRevision 21
+	bool IPsecMessageDisplayed true
+	string Region $
+	bool VgsMessageDisplayed false
+	……
+------
+ +string Region+ 这个配置怎么改都会还原成 CN，直接改 vpn_server.conf，改完了 chattr +i 都没用，管理工具上编辑配置看了还是 CN。
+
+现在除了改源代码，不知道怎么解决。谁有更方便的办法请告诉我，比如在安装的时候加选项什么的。论坛里有人发帖^<<4>>^问了，但是没人回复。
 
 == 参考资源
  - [[[1]]] http://mawenjian.net/p/1281.html[SoftEther VPN——Linux下搭建VPN可以如此简单]
  - [[[2]]] http://mawenjian.net/p/1456.html[SoftEther VPN进阶：静态路由表推送（拆分隧道）]
  - [[[3]]] https://www.softether.org/4-docs/1-manual/A._Examples_of_Building_VPN_Networks/10.1_Types_of_VPNs[10.1 Types of VPNs]
+ - [[[4]]] http://www.vpnusers.com/viewtopic.php?t=3059&p=6529[How to enable split-tunneling function in China --SoftEther VPN User Forum]
+ - [[[5]]] http://www.freebuf.com/tools/40418.html[SoftEther VPN Server (VPN Gate) 安装笔记 -- FreeBuf]
