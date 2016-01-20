@@ -1,0 +1,115 @@
+= Rust 在 CentOS 6 下交叉编译
+Google Plus <https://plus.google.com/u/0/+TerryZheng-404/about[+Terry Zheng]>; Twitter <https://twitter.com/Gotnix[@Gotnix]>
+v0.1, 2016-01-19
+:lang: zh-cmn-Hans
+:doctype: article
+:description: Rust 交叉编译 Windows 可执行程序
+:keywords: rust, cross_compling
+:icons: font
+:source-highlighter: highlightjs
+:linkcss!:
+:numbered:
+:idprefix:
+:toc: right
+:toclevels: 3
+:experimental:
+:showtitle:
+
+== 前言
+本文是参考 <<Rust-ArchWiki>> 写的，主要作用就是把 https://www.archlinux.org/[ArchLinux] 的软件包名字换成了 https://www.centos.org/[CentOS] 的软件包。如果你对 ArchLinux 和 CentOS 都比较熟悉，直接看 <<Rust-ArchWiki>> 原文就行了。
+
+== 准备工作
+* Rust 本地编译环境正常
++
+[literal]
+.rustc --version
+....
+rustc 1.5.0 (3d7cd77e4 2015-12-04)
+....
++
+然后自己 cargo new 一个 Hello World 跑通就行了。
+
+* 检查 EPEL Yum 源已添加并启用
++
+EPEL 源基本上已经是 RHEL/CentOS 的标配了，如果碰巧你的没有，执行以下命令安装：
++
+[source,bash]
+.配置 EPEL Yum 源
+------
+yum --disablerepo="*" --enablerepo="epel" repolist | grep epel \
+  || { rpm -Uvh "http://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm" \
+         && rpm --import "http://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-6" \
+         && yum clean all \
+         && yum makecache
+     }
+------
+
+== 安装交叉编译工具链
+不同的 Linux 发行版软件包的名字不同，CentOS 对应的包名字如下表：
+[options="header,autowidth"]
+.ArchLinux CentOS 软件包对应关系
+|===
+|ArchLinux|CentOS
+|mingw-w64-gcc|mingw64-gcc
+|wine|wine
+|binfmt-wine|wine-sysvinit
+|===
+  
+[source,bash]
+.安装交叉编译工具
+------
+yum -y install mingw64-gcc wine wine-sysvinit
+------
+
+剩下的步骤都和 <<Rust-ArchWiki>> 中一样了：
+[source,bash]
+.下载安装 Rust Windows 环境
+------
+wget -c "https://static.rust-lang.org/dist/rust-1.5.0-x86_64-pc-windows-gnu.msi"
+wine msiexec /i "rust-1.5.0-x86_64-pc-windows-gnu.msi"
+------
+
+[source,bash]
+.复制 Windows 的 Rust 标准库到 Linux 下 Rust 库目录下
+------
+cp -r ~/.wine/drive_c/Program\ Files\ \(x86\)/Rust\ stable\ 1.5/bin/rustlib/x86_64-pc-windows-gnu/ /usr/local/lib/rustlib/
+------
+
+上述步骤完成后目录结构如下：
+[literal]
+.tree -d /usr/local/lib/rustlib/
+....
+/usr/local/lib/rustlib/
+├── etc
+├── x86_64-pc-windows-gnu
+│   ├── bin
+│   └── lib
+└── x86_64-unknown-linux-gnu
+    └── lib
+
+6 directories
+....
+
+== 配置 Cargo 
+最后修改 Cargo 配置，告诉 cargo 到哪里去找 MinGW-w64 gcc/ar
+[source,bash]
+.~/.cargo/config
+------
+cat > ~/.cargo/config << EOF
+[target.x86_64-pc-windows-gnu]
+linker = "/usr/bin/x86_64-w64-mingw32-gcc"
+ar = "/usr/x86_64-w64-mingw32/bin/ar"
+EOF
+------
+
+== 测试
+[source,bash]
+------
+cargo new hello_world --bin
+cargo build --release --target "x86_64-pc-windows-gnu" --verbose
+wine target/x86_64-pc-windows-gnu/release/hello_world.exe # 这里有 wine 的报错，拷到 Windows 下正常
+------
+
+== 参考链接
+[bibliography]
+- [[[Rust-ArchWiki]]] https://wiki.archlinux.org/index.php/Rust
