@@ -34,6 +34,11 @@ http://www.technorms.com/8208/check-if-processor-supports-virtualization[3 Easy 
 == 虚拟机安装后的配置
 找个速度块的镜像网站下载 `CentOS-6.8-x86_64-minimal.iso`，文件校验一下，没有问题正常安装就行了。好像 VirutalBox 的 NAT 虚拟网络不能自定义 DHCP 服务的配置，主要是我想改 DNS 服务器的地址。所以我就在虚拟机里来做了，这样比较麻烦，每个系统都要改配置。
 
+[TIP]
+----
+植入广告，推荐一下注重轻量、简单、安全的 Linux 发行版 http://alpinelinux.org/about/[Alpine Linux]，我在 VirtualBox 装好 Virtual 版本以后，/ 分区用了 89.3M，/boot/ 分区用了 16.5M。iso 也不大，http://alpinelinux.org/downloads/[alpine-virt-3.4.0-x86_64.iso] 只有36MB。
+----
+
 `vi /etc/sysconfig/network-scripts/ifcfg-eth0`，改动内容如下，配置含义请看 
 https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html[11.2. Interface Configuration Files] 或者 
 https://access.redhat.com/documentation/zh-CN/Red_Hat_Enterprise_Linux/7/html/Networking_Guide/sec-Using_the_Command_Line_Interface.html[2.4.1. 使用 ifcfg 文件配置网络接口]：
