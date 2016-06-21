@@ -94,7 +94,7 @@ yum -y install kernel-devel gcc perl dbus
 mount /devcdrom /mnt && bash /mnt/VBoxLinuxAdditions.run
 ----
 
-剩下是我的收尾工作，Kernel 升级过了，把就版本的卸载掉，省点空间。
+Kernel 升级过了，把旧版本的卸载掉（`rpm -e` 就能搞定），省点空间。剩下是我的收尾工作，
 [source,bash]
 ----
 # 安装常用的工具
