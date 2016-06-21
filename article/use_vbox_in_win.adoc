@@ -1,0 +1,108 @@
+= Windows 下使用 VirtualBox
+Google Plus <https://plus.google.com/u/0/+TerryZheng-404/about[+Terry Zheng]>; Twitter <https://twitter.com/Gotnix[@Gotnix]>
+v0.1, 2016-01-19
+:lang: zh-cmn-Hans
+:doctype: article
+:description: Windows 下使用 VirutalBox
+:keywords: VirtualBox, Virtualization
+:icons: font
+:source-highlighter: highlightjs
+:linkcss!:
+:numbered:
+:idprefix:
+:toc: right
+:toclevels: 3
+:experimental:
+:showtitle:
+
+== 宿主机虚拟化环境
+宿主机是 Windows 系统，网络连接方式是 `NAT 网络` 或者 `网络地址转换（NAT）`。下载、安装 Oracle VM VirtualBox 管理器就不多说了，到 https://www.virtualbox.org/wiki/Downloads[官网] 自行下载对应版本。安装后可以酌情改一下 Oracle VM VirutalBox 管理器的全局配置（快捷键 kbd:[Ctrl+G]），比如保存虚拟机的默认位置、虚拟网络的配置，装扩展包之类的。 
+
+Windows 作为宿主机的硬件虚拟化选项还没有关注过，Linux 下检查虚拟化的硬件支持情况看这两篇教程就够了：
+
+* http://virt-tools.org/learning/check-hardware-virt/[How to check if your hardware supports virtualization]
+* http://www.linux-kvm.org/page/How_to_assign_devices_with_VT-d_in_KVM[How to assign devices with VT-d in KVM]
+
+还有 https://software.intel.com/en-us/forums/virtualization-software-development/topic/304499[How to check if VT is enabled in the BIOS?] 这篇是 Intel 论坛里的帖子，讨论通过 Dump BIOS 信息检查是否开启虚拟化的方法。
+
+http://www.technorms.com/8208/check-if-processor-supports-virtualization[3 Easy Ways to to Check If Your Processor Supports Virtualization] 这篇教程介绍了 3 款 Windows 下的工具，除了 Intel、AMD 的 CPU 工具，Microsoft 也有检查 HyperV、VirtualPC 运行环境的工具。文中提到的 http://www.grc.com/securable.htm[SecurAble] 和 http://www.intel.com/p/en_US/support/highlights/processors/toolspiu/[英特尔(R) 处理器标识实用程序] 都是检查 CPU 是否支持虚拟化，BIOS 是否启用 Intel 处理器的 VT-x 和 VT-d 这 2 款工具都看不到。 如果只想知道 CPU 对虚拟化的支持程度，直接到 http://ark.intel.com/[Intel ARK] 或者 http://products.amd.com/[AMD Product Central] 通过 CPU 型号去查就行了，有下载工具的功夫，早就通过网站查完了。况且 Intel ARK 也支持中文。
+
+我这里（Intel i3-4010U）测试下来 VirtualBox 只对 VT-x 敏感，如果 BIOS 没打开这个选项，只能创建 32bit 的虚拟机，开启 VT-x 以后才可以创建 64bit 的虚拟机，VT-d 貌似没有什么影响。
+
+谁知道在 Windows 系统里怎么检查 BIOS 是否启用虚拟化选项，还请告诉我。 
+
+== 虚拟机安装后的配置
+找个速度块的镜像网站下载 `CentOS-6.8-x86_64-minimal.iso`，文件校验一下，没有问题正常安装就行了。好像 VirutalBox 的 NAT 虚拟网络不能自定义 DHCP 服务的配置，主要是我想改 DNS 服务器的地址。所以我就在虚拟机里来做了，这样比较麻烦，每个系统都要改配置。
+
+`vi /etc/sysconfig/network-scripts/ifcfg-eth0`，改动内容如下，配置含义请看 
+https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/s1-networkscripts-interfaces.html[11.2. Interface Configuration Files] 或者 
+https://access.redhat.com/documentation/zh-CN/Red_Hat_Enterprise_Linux/7/html/Networking_Guide/sec-Using_the_Command_Line_Interface.html[2.4.1. 使用 ifcfg 文件配置网络接口]：
+
+[source,diff]
+----
+--- /tmp/ifcfg-eth0_orig        2016-06-20 14:50:00.157047571 +0800
++++ /etc/sysconfig/network-scripts/ifcfg-eth0   2016-06-20 10:56:50.991998547 +0800
+@@ -5,2 +5,2 @@
+-ONBOOT=no
+-NM_CONTROLLED=yes
++ONBOOT=yes
++NM_CONTROLLED=no
+@@ -7,0 +8,3 @@
++DNS1=223.5.5.5
++DNS2=223.6.6.6
++PEERDNS=yes
+----
+参考： http://www.ruanyifeng.com/blog/2012/08/how_to_read_diff.html[读懂diff]
+
+`vi /etc/dhcp/dhclient-enter-hooks`，内容如下，详细信息请参考 http://linux.die.net/man/8/dhclient-script[dhclient-script(8)]：
+
+[source,bash]
+----
+make_resolv_conf(){
+    :
+}
+----
+参考： http://www.cyberciti.biz/faq/dhclient-etcresolvconf-hooks/[How To: Make Sure /etc/resolv.conf Never Get Updated By DHCP Client]
+
+
+然后 /etc/init.d/network restart，正常情况下就可以联网了，`ping -c 3 223.5.5.5` 能通就是正常的。
+
+
+下面的操作就看个人，做不做都无所谓。
+
+[source,bash]
+----
+# 关闭用不到的服务
+for serv in iptables ip6tables mdmonitor; do
+  chkconfig --level 2345 ${serv} off
+  /etc/init.d/${serv} stop
+done
+
+# 禁用 SELinux，重启后生效
+sed -i '/^SELINUX=/cSELINUX=disabled' /etc/selinux/config
+
+yum clean all && yum makecache` # 重建一下yum 缓存
+yum -y update && shutdown -r now # 更新系统完成后重启
+----
+
+安装增强工具要先把光盘插进去，VirtualBox 菜单， menu:设备[安装增强功能…]，然后到虚拟机的终端操作。
+[source,bash]
+----
+# Guest Additions 依赖
+yum -y install kernel-devel gcc perl dbus
+# 挂载 Additions 光盘并安装工具
+mount /devcdrom /mnt && bash /mnt/VBoxLinuxAdditions.run
+----
+
+剩下是我的收尾工作，Kernel 升级过了，把就版本的卸载掉，省点空间。
+[source,bash]
+----
+# 安装常用的工具
+yum -y install vim-minimal openssh-clients rsync curl nc ldns
+# 清理日志
+find /var/log/ -type f | xargs -t -I {f} rm -f {f}
+# 清除命令历史记录
+history -c; : > ~/.bash_history; history -w; shutdown -h now
+----
+
+关机后建个快照，打完收工。
