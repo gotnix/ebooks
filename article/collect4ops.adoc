@@ -1,6 +1,8 @@
 == 其他人收集的资料
-* https://github.com/geekwolf/sa-scripts/blob/master/devops.md 国内运维收集的常用工具
-* https://github.com/kahun/awesome-sysadmin 大而全的 SA 工具集列表
+* https://github.com/geekwolf/sa-scripts/blob/master/devops.md[国内运维收集的常用工具]
+* https://github.com/kahun/awesome-sysadmin[大而全的 SA 工具集列表]
+* https://github.com/vhf/free-programming-books[免费的编程书]
+
 
 == 数据库相关
 * http://weibo.com/ttarticle/p/show?id=2309404002499928426290[为什么Uber宣布从Postgres切换到MySQL?] --by Evan Klitzke 高可用架构
@@ -16,7 +18,7 @@
 ** http://ipinfo.io/developers
 ** http://myip.ipip.net/
 ** http://ip.cn
-
+* http://www.simlinux.com/archives/264.html[16 款在线工具] --by Geekwolf
 
 == http 服务
 
