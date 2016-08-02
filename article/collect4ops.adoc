@@ -19,4 +19,5 @@
 == 编程语言
 * https://exploringdata.github.io/vis/programming-languages-influence-network/[编程语言之间的关系网络图]
 * http://archive.oreilly.com/pub/a/oreilly/news/languageposter_0504.html[The History of Programming Languages]
+* https://zh.wikipedia.org/wiki/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E6%AD%B7%E5%8F%B2[程式語言歷史]
 * http://www.yinwang.org/blog-cn/2012/08/01/interpreter[怎样写一个解释器]
