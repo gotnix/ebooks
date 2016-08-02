@@ -15,3 +15,8 @@
 
 == 调试工具
 * http://hushi55.github.io/2014/12/31/byteman[Byteman] jboss 项目下一个跟踪 Java 代码的工具，使用方法类似 Systemtap 之于 Linux Kernel。目测会比 Tomcat 的 JPDA 的速度快很多，只支持 Hotspot 和 jrockit 的 JVM。 http://byteman.jboss.org/downloads[下载Byteman]
+
+== 编程语言
+* https://exploringdata.github.io/vis/programming-languages-influence-network/[编程语言之间的关系网络图]
+* http://archive.oreilly.com/pub/a/oreilly/news/languageposter_0504.html[The History of Programming Languages]
+* http://www.yinwang.org/blog-cn/2012/08/01/interpreter[怎样写一个解释器]
