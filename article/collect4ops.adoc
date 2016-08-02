@@ -1,4 +1,5 @@
 == 其他人收集的资料
+* https://github.com/sindresorhus/awesome[Awesome 列表的策划清单]
 * https://github.com/geekwolf/sa-scripts/blob/master/devops.md[国内运维收集的常用工具]
 * https://github.com/kahun/awesome-sysadmin[大而全的 SA 工具集列表]
 * https://github.com/vhf/free-programming-books[免费的编程书]
