@@ -6,7 +6,7 @@
 * http://weibo.com/ttarticle/p/show?id=2309404002499928426290[为什么Uber宣布从Postgres切换到MySQL?] by Evan Klitzke 高可用架构
 * https://yq.aliyun.com/articles/58421[为PostgreSQL讨说法 - 浅析《UBER ENGINEERING SWITCHED FROM POSTGRES TO MYSQL》] by 德哥 云栖社区
 
-* http://goo.gl/tQtNVd[MySQL的SSL加密连接与性能开销] by  姜承尧 InsideMySQL
+* http://www.innomysql.com/article/24297.html[MySQL的SSL加密连接与性能开销] by  姜承尧 InsideMySQL
 * http://www.innomysql.com/article/25717.html[安全为上，赶快启动MySQL密码审计插件吧] by 姜承尧 Inside MySQL Group
 
 == http 服务
