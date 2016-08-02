@@ -25,6 +25,7 @@
 
 == 基础协议
 * https://github.com/http2/http2-spec/wiki/Implementations[http2 协议相关实现] 可以用来查看常用的 https 客户端、服务端都支持 http2 的哪些特性。
+* https://hpbn.co/[High Performance Browser Networking (O'Reilly)], http://www.ituring.com.cn/book/1194[《Web性能权威指南》]
 * https://imququ.com/post/http2-resource.html[HTTP/2 资料汇总] --by Jerry Qu
 * https://imququ.com/post/http2-traffic-in-wireshark.html[使用 Wireshark 调试 HTTP/2 流量] --by Jerry Qu
 * https://imququ.com/post/intro-to-nghttp2.html[使用 nghttp2 调试 HTTP/2 流量] --by Jerry Qu
