@@ -1,6 +1,6 @@
 == 其他人收集的资料
 * https://github.com/geekwolf/sa-scripts/blob/master/devops.md 国内运维收集的常用工具
-* https://github.com/kahun/awesome-sysadmin 国际范的 SA 工具集
+* https://github.com/kahun/awesome-sysadmin 大而全又具有国际范的 SA 工具集列表
 
 == 数据库相关
 * http://weibo.com/ttarticle/p/show?id=2309404002499928426290[为什么Uber宣布从Postgres切换到MySQL?] by Evan Klitzke 高可用架构
@@ -12,3 +12,6 @@
 == http 服务
 
 == 基础协议
+
+== 调试工具
+* http://hushi55.github.io/2014/12/31/byteman[Byteman] jboss 项目下一个跟踪 Java 代码的工具，使用方法类似 Systemtap 之于 Linux Kernel。目测会比 Tomcat 的 JPDA 的速度快很多，只支持 Hotspot 和 jrockit 的 JVM。 http://byteman.jboss.org/downloads[下载Byteman]
