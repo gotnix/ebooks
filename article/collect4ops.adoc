@@ -1,23 +1,41 @@
 == 其他人收集的资料
 * https://github.com/geekwolf/sa-scripts/blob/master/devops.md 国内运维收集的常用工具
-* https://github.com/kahun/awesome-sysadmin 大而全又具有国际范的 SA 工具集列表
+* https://github.com/kahun/awesome-sysadmin 大而全的 SA 工具集列表
 
 == 数据库相关
-* http://weibo.com/ttarticle/p/show?id=2309404002499928426290[为什么Uber宣布从Postgres切换到MySQL?] by Evan Klitzke 高可用架构
-* https://yq.aliyun.com/articles/58421[为PostgreSQL讨说法 - 浅析《UBER ENGINEERING SWITCHED FROM POSTGRES TO MYSQL》] by 德哥 云栖社区
+* http://weibo.com/ttarticle/p/show?id=2309404002499928426290[为什么Uber宣布从Postgres切换到MySQL?] --by Evan Klitzke 高可用架构
+* https://yq.aliyun.com/articles/58421[为PostgreSQL讨说法 - 浅析《UBER ENGINEERING SWITCHED FROM POSTGRES TO MYSQL》] --by 德哥 云栖社区
 
-* http://www.innomysql.com/article/24297.html[MySQL的SSL加密连接与性能开销] by  姜承尧 InsideMySQL
-* http://www.innomysql.com/article/25717.html[安全为上，赶快启动MySQL密码审计插件吧] by 姜承尧 Inside MySQL Group
+* http://www.innomysql.com/article/24297.html[MySQL的SSL加密连接与性能开销] --by 姜承尧 InsideMySQL
+* http://www.innomysql.com/article/25717.html[安全为上，赶快启动MySQL密码审计插件吧] --by 姜承尧 Inside MySQL Group
+
+== Web 工具
+* http://www.speedtest.net/[测网速]
+* http://zh.lmgtfy.com/[让我帮你 Google 你要的东西]
+* 查出口 IP 地址
+** http://ipinfo.io/developers
+** http://myip.ipip.net/
+** http://ip.cn
+
 
 == http 服务
 
 == 基础协议
+* https://github.com/http2/http2-spec/wiki/Implementations[http2 协议相关实现] 可以用来查看常用的 https 客户端、服务端都支持 http2 的哪些特性。
+* https://imququ.com/post/http2-resource.html[HTTP/2 资料汇总] --by Jerry Qu
+* https://imququ.com/post/http2-traffic-in-wireshark.html[使用 Wireshark 调试 HTTP/2 流量] --by Jerry Qu
+* https://imququ.com/post/intro-to-nghttp2.html[使用 nghttp2 调试 HTTP/2 流量] --by Jerry Qu
+* https://blog.cloudflare.com/tag/tls/[CloudFlaer 的 TLS 文章]
 
 == 调试工具
-* http://hushi55.github.io/2014/12/31/byteman[Byteman] jboss 项目下一个跟踪 Java 代码的工具，使用方法类似 Systemtap 之于 Linux Kernel。目测会比 Tomcat 的 JPDA 的速度快很多，只支持 Hotspot 和 jrockit 的 JVM。 http://byteman.jboss.org/downloads[下载Byteman]
+* http://hushi55.github.io/2014/12/31/byteman[Byteman] jboss 项目下一个跟踪 Java 代码的工具，使用方法类似 Systemtap 之于 Linux Kernel。目测会比 Tomcat 的 JPDA 的速度快很多，只支持 Hotspot 和 JRockit 的 JVM。 http://byteman.jboss.org/downloads[下载Byteman]
 
 == 编程语言
 * https://exploringdata.github.io/vis/programming-languages-influence-network/[编程语言之间的关系网络图]
 * http://archive.oreilly.com/pub/a/oreilly/news/languageposter_0504.html[The History of Programming Languages]
 * https://zh.wikipedia.org/wiki/%E7%A8%8B%E5%BC%8F%E8%AA%9E%E8%A8%80%E6%AD%B7%E5%8F%B2[程式語言歷史]
-* http://www.yinwang.org/blog-cn/2012/08/01/interpreter[怎样写一个解释器]
+* http://www.yinwang.org/blog-cn/2012/08/01/interpreter[怎样写一个解释器] --by 王垠
+* http://benchmarksgame.alioth.debian.org/[The Computer Language Benchmarks Game]
+
+== 社区文化
+* https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way[提問的智慧]
