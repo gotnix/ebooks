@@ -1,0 +1,31 @@
+== 优化 KDE
+KDE 有 https://forum.suse.org.cn/viewtopic.php?p=11996&f=2#p11996[「卡机三驾马车」]，
+https://github.com/SUSE/hackweek/wiki/Lightweight-KDE-based-desktop[Lightweight KDE based desktop] 这个项目现在又不知道是什么情况，还是禁用掉三驾马车比较现实。
+
+[source,diff]
+.Disable Baloo
+----
+--- /tmp/orig/baloofilerc       2016-08-06 18:20:19.769554224 +0800
++++ /home/terry/.config/baloofilerc     2016-08-06 16:42:04.982370311 +0800
+@@ -1,3 +1,3 @@
+ [Basic Settings]
+-Indexing-Enabled=true
++Indexing-Enabled=false
+----
+
+[source,diff]
+.Disable Akonadi
+----
+--- /tmp/orig/akonadiserverrc   2016-08-06 18:20:43.065525983 +0800
++++ /home/terry/.config/akonadi/akonadiserverrc 2016-08-06 16:39:17.257014543 +0800
+@@ -11,2 +11,2 @@
+ ServerPath=/usr/sbin/mysqld
+-StartServer=true
++StartServer=false
+----
+
+
+* http://www.databook.bz/?page_id=3728[KDE — How to disable Nepomuk, Strigi, Baloo and Akonadi]
+* https://blogs.kde.org/2013/04/11/hackweek9-lightweight-kde-desktop-project-updated[https://blogs.kde.org/2013/04/11/hackweek9-lightweight-kde-desktop-project-updated]
+* https://forums.opensuse.org/showthread.php/485834-KLyDE-A-New-Lightweight-KDE-Project-Started[Thread: KLyDE: A New Lightweight KDE Project Started]
+* https://build.opensuse.org/project/show?project=home%3Awstephenson%3Aworkbench%3Aklyde[KDE Lightweight Desktop Environment 项目]
