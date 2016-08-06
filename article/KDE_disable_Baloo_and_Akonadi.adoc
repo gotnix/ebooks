@@ -1,6 +1,6 @@
-== 优化 KDE
+== 优化 KDE: 禁用 Baloo 和 Akonadi
 KDE 有 https://forum.suse.org.cn/viewtopic.php?p=11996&f=2#p11996[「卡机三驾马车」]，
-https://github.com/SUSE/hackweek/wiki/Lightweight-KDE-based-desktop[Lightweight KDE based desktop] 这个项目现在又不知道是什么情况，还是禁用掉三驾马车比较现实。
+https://github.com/SUSE/hackweek/wiki/Lightweight-KDE-based-desktop[Lightweight KDE based desktop] 这个项目现在又不知道是什么情况，还是禁用掉三驾马车比较现实。参考的文章里禁用了Nepomuk、Strigi、Baloo 和 Akonadi，我的 KDE 里只有 Baloo 和 Akonadi，原文有 GUI 下和修改配置文件的操作步骤，我的配置文件修改如下：
 
 [source,diff]
 .Disable Baloo
