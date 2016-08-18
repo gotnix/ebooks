@@ -27,13 +27,15 @@ v1.0, 2016-08-17
 |Oracle Database (includes Oracle Database and Oracle RAC)
 [NOTE]
 ====
-You must download both zip files to install Oracle Database.
+You must download both zip files +
+to install Oracle Database.
 ====
 
 |p13390677_112040_platform_1of7.zip +
 p13390677_112040_platform_2of7.zip
 
-|Oracle Grid Infrastructure (includes Oracle ASM, Oracle Clusterware, and Oracle Restart)
+|Oracle Grid Infrastructure (includes Oracle ASM, +
+    Oracle Clusterware, and Oracle Restart)
 |p13390677_112040_platform_3of7.zip
 
 |Oracle Database Client
