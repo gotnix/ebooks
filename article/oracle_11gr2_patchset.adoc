@@ -18,35 +18,33 @@ v1.0, 2016-08-17
 * https://updates.oracle.com/ARULink/PatchDetails/process_form?patch_num=13390677[Patchset 13390677] 页面，点『View Digest』获取文件校验码。
 * http://www.findeen.co.uk/p13390677_112040_%E7%99%BE%E5%BA%A6_%E7%BD%91%E7%9B%98.html[findeen] 搜索『p13390677 112040 百度 网盘』 
 
-[cols="5a,2", options="header"]
+[cols=",m", options="header, autowidth"]
 .Installation Types and Associated Zip Files
 |===
-|Installation Type
-|Zip File
+^|Installation Type
+^|Zip File
 
-|Oracle Database (includes Oracle Database and Oracle RAC)
+a|Oracle Database (includes Oracle Database and Oracle RAC)
 [NOTE]
 ====
-You must download both zip files +
-to install Oracle Database.
+You must download both zip files to install Oracle Database.
 ====
 
-|p13390677_112040_platform_1of7.zip +
+.^|p13390677_112040_platform_1of7.zip +
 p13390677_112040_platform_2of7.zip
 
-|Oracle Grid Infrastructure (includes Oracle ASM, +
-	Oracle Clusterware, and Oracle Restart)
-|p13390677_112040_platform_3of7.zip
+.^|Oracle Grid Infrastructure (includes Oracle ASM, Oracle Clusterware, and Oracle Restart)
+.^|p13390677_112040_platform_3of7.zip
 
-|Oracle Database Client
-|p13390677_112040_platform_4of7.zip
+.^|Oracle Database Client
+.^|p13390677_112040_platform_4of7.zip
 
 |Oracle Gateways
 |p13390677_112040_platform_5of7.zip
 
-|Oracle Examples
-|p13390677_112040_platform_6of7.zip
+.^|Oracle Examples
+.^|p13390677_112040_platform_6of7.zip
 
-|Deinstall
-|p13390677_112040_platform_7of7.zip
+.^|Deinstall
+.^|p13390677_112040_platform_7of7.zip
 |===
