@@ -35,7 +35,7 @@ to install Oracle Database.
 p13390677_112040_platform_2of7.zip
 
 |Oracle Grid Infrastructure (includes Oracle ASM, +
-    Oracle Clusterware, and Oracle Restart)
+	Oracle Clusterware, and Oracle Restart)
 |p13390677_112040_platform_3of7.zip
 
 |Oracle Database Client
