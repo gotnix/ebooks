@@ -18,14 +18,17 @@ v1.0, 2016-08-17
 * https://updates.oracle.com/ARULink/PatchDetails/process_form?patch_num=13390677[Patchset 13390677] 页面，点『View Digest』获取文件校验码。
 * http://www.findeen.co.uk/p13390677_112040_%E7%99%BE%E5%BA%A6_%E7%BD%91%E7%9B%98.html[findeen] 搜索『p13390677 112040 百度 网盘』 
 
-[cols="2", options="header"]
+[cols="5a,2", options="header"]
 .Installation Types and Associated Zip Files
 |===
 |Installation Type
 |Zip File
 
-|Oracle Database (includes Oracle Database and Oracle RAC) +
-NOTE: You must download both zip files to install Oracle Database.
+|Oracle Database (includes Oracle Database and Oracle RAC)
+[NOTE]
+====
+You must download both zip files to install Oracle Database.
+====
 
 |p13390677_112040_platform_1of7.zip +
 p13390677_112040_platform_2of7.zip
