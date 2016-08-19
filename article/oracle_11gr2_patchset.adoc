@@ -39,8 +39,8 @@ p13390677_112040_platform_2of7.zip
 .^|Oracle Database Client
 .^|p13390677_112040_platform_4of7.zip
 
-|Oracle Gateways
-|p13390677_112040_platform_5of7.zip
+.^|Oracle Gateways
+.^|p13390677_112040_platform_5of7.zip
 
 .^|Oracle Examples
 .^|p13390677_112040_platform_6of7.zip
