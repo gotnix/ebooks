@@ -1,0 +1,33 @@
+现在 crontab 都是用 su 切用户执行脚本，看了 cron 文档，发现可指定用户去执行 job，但是有点小坑。RHEL 的《Deployment Guide》 <<guide>> 写的语法是错误的，正确的语法要看 `man 5 crontab`。结论如下：
+
+. 使用 `crontab -e` 的时候不能在配置文件里指定用户名，想以其他用户执行 job 只能 `crontab -e -u name` 这样写配置。否则会把用户名当成命令执行。
+
+. `/etc/cron.d/` 目录下自己用编辑器创建配置文件，常见的系统服务的计划任务配置就在这个目录下。这个目录也是只有 `root` 有权限创建配置，配置文件里可以使用：
++
+[source,console]
+----
+minute   hour   day   month   day of week   username   command
+----
++
+这样的格式，用户的 login shell <<loginsh>> 不能是 `/sbin/nologin`，用 `/bin/false` 都没关系。
+
+. cron 配置文件里的命令部分出现 `%` 需要转义。
+
+测试用到的配置如下：
+[source,bash]
+./etc/cron.d/user-job
+----
+SHELL=/bin/bash
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+MAILTO=""
+HOME=/
+* * * * *  tcpdump  { echo "$(id) AT $(date +\%F_\%T)"; pinky -l tcpdump; } &> /tmp/test.log  // <1>
+----
+<1> tcpdump 要改下 login shell <<loginsh>>， `usermod -s /bin/false tcpdump`，测试结束改回去， `usermod -s /sbin/nologin tcpdump`。
+
+'''
+[bibliography]
+参考链接：
+
+- [[[guide]]] Red Hat Enterprise Linux » 6.8 » Deployment Guide » ⁠Chapter 26. Automating System Tasks »  https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Deployment_Guide/ch-Automating_System_Tasks.html#s2-configuring-cron-jobs[26.1.4. Configuring Cron Jobs]
+- [[[loginsh]]] http://openwares.net/linux/refuse_login.html[拒绝用户登录:/bin/false和/usr/sbin/nologin]，不知道这里的解释是否正确，因为在 cron 里 `/sbin/nologin` 不能做的事情 `/bin/false` 却可以。
