@@ -1,7 +1,7 @@
 https://en.wikipedia.org/wiki/Mailx[mailx - Wikipedia]
 
 [source,console]
-.CentOS 6 下的 mailx-12.4-8.el6_6.x86_64
+.CentOS 6 下开源的 Heirloom mailx， mailx-12.4-8.el6_6.x86_64
 ----
 # » rpm -q mailx
 mailx-12.4-8.el6_6.x86_64
@@ -21,9 +21,9 @@ mailx-12.4-8.el6_6.x86_64
 /usr/share/man/man1/mailx.1.gz
 /usr/share/man/man1/nail.1.gz
 ----
-<1> mail 是 Unix 1st Edition 和后续版本直到 System Ⅴ 的 MUA。
-<2> Mail 是 Kurt Shoens 於 1978 年写的 Berkeley Mail。
-<3> mailx 是 System Ⅴ Release 3 基于 Berkeley Mail 的衍生品。
+<1> 原始的 mail 是 Unix 1st Edition 和后续版本直到 System Ⅴ 的 MUA。
+<2> 原始的 Mail 是 Kurt Shoens 於 1978 年写的 Berkeley Mail。
+<3> 原始的 mailx 是 System Ⅴ Release 3 基于 Berkeley Mail 的衍生品。
 <4> Heirloom mailx 2006 年 3 月之前在 nail 名下开发，后来合并到 Heirloom 项目。
 
 现在 Linux 发行版中 mailx 都是 Heirloom mailx，是 Berkeley Mail 的衍生品。自从 mailx 10 以来独立实现 System Ⅴ 和 POSIX mailx additions 的特性。
