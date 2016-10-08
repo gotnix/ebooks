@@ -1,0 +1,42 @@
+https://en.wikipedia.org/wiki/Mailx[mailx - Wikipedia]
+
+mail 是 Unix 1st Edition 和后续版本直到 System Ⅴ 的 MUA。
+Mail 是 Kurt Shoens 於 1978 年写的 Berkeley Mail。
+mailx 是 System Ⅴ Release 3 基于 Berkeley Mail 的衍生品。
+
+现在 Linux 发行版中 mailx 都是 Heirloom mailx，是 Berkeley Mail 的衍生品。自从 mailx 10 以来独立实现 System Ⅴ 和 POSIX mailx additions 的特性。
+所以在 RHEL 5 中使用 nail，RHEL 6 下是 mailx-12.4，可以使用远程的 MTA，而且 nail 包也已经被废弃，直接使用 mailx 即可。
+
+http://heirloom.sourceforge.net/mailx_history.html[mail, Mail, mailx, nail—history notes]
+最有历史的是 mail，从 1971 年的第 1 版 UNIX 就存在了。这个时候的 UNIX 不具备远程通信设施，mail 只是把消息写入本机其他用户的文件里。
+
+mail 在后来的 UNIX 版本更新了一下，中可以调用 uux 和后来的 sendmail 发送远程邮件，而且还有很少用于邮箱中导航的交互命令。A mail command like this was standardized with the System V Interface Definition (SVID) and the Single Unix Specification (up to the 1998 edition)。
+
+随着 System Ⅴ 的后续版本，e.g. a facility to print header summaries. An Open Source version of such a mail command is available as part of the Heirloom Toolchest package; see its manual page for an overview of its features. Yet all derivatives of the original mail remained somewhat primitive; since they neither invoke a pager for viewing messages longer than a CRT screen, nor offer a method to set Subject lines, they are not well suited for use with Internet mail. They are still appropriate to send short messages, though.
+
+What one should learn from this is, however, that any use of a mail command with the -s option to set a subject line in a shell script is unportable and will not work on some Unix implementations.
+
+1978 年 Kurt Shoens 给 UNIX 写了另一个 MTA：Berkeley Mail，这个不是原始 mail 的衍生品，包含在 2BSD 发行版（2BSD 只是作为 Unix 第6版和第7版的 add-on）里，用户界面已经完成，如果 Heirloom mailx 设置 bsdcompat 选项，用起来和 Berkeley Mail 差不多。 Berkeley Mail 是 /usr/ucb/Mail，Unix mail 是 /bin/mail。
+
+真正的混乱开始了，3BSD 作为一个完整的系统，而不是一个 UNIX 的 add-on，提供了 /usr/ucb/mail，并做了一个链接到 Mail。所以到底是调用 Unix mail，还是 Berkeley Mail，取决于 PATH 变量的配置。包括 Berkeley 发布的 4.3BSD-Tahoe 以及衍生品都是这样，直到最后删除 Unix mail，使用 Mail 链接到所有地方。
+
+System Ⅴ 第 3 版创建了一个 Berkeley Mail 的衍生物 -- mailx。mailx 尽量兼容 Mail，但有些附加组件和用户界面少有变化（Heirloom malix 使用相似的界面，如果没有设置 bsdcompat 变量）。这个 System Ⅴ mailx 命令随后于 1992 年使用 POSIX.2 规范化，还有很多扩展。
+
+Linux 发行版是情况更加混乱，Linux 只用使用原来的 Berkeley Mail（System Ⅴ 的 mailx 是闭源软件，直到 2005 年 OpenSolaris 发布）。然而，因为对于大多数应用程序而言 Mail 和 mailx 足够相似，Mail 还有许多额外的功能，mailx 命令只是使用 Mail。因此不完全符合 POSIX.2。
+
+要结束混乱的现状，一些商用 Unix 厂商随着时间的推移，放弃对原始 mail 的支持，是 mail 调用 mailx。
+
+Heirloom mailx 来自 Berkeley Mail。从 v10 开始，Heirloom mailx 还具备独立实现的 System Ⅴ 和 POSIX mailx 附加功能。
+
+Heirloom mailx 之前在 nail 名下开发，2006 年 3 月融入到 Heirloom 项目。
+
+如果 Mail 被调用，在调用 mailx 之前，一个短小的 shell 脚本会设置 bsdcompat 变量，使 mailx 兼容 Berkeley Mail。mail 只不过是一个完全不同的命令，如果期望是一个开源版本，应该使用 Heirloom Toolchest 提供的版本。
+
+可移植脚本要么调用 mail 不加任何选项，要么使用标准化的 mailx 接口。在任何情况下，都应该将 MAILRC 变量设置为 /dev/null 绕过用户配置（~/.mailrc）。MAILRC 这个变量只存在于 mailx，Mail 不存在这个变量，无论如何 Mail 在脚本里工作都不可靠，应该避免在脚本里使用 Mail。
+
+
+http://heirloom.sourceforge.net/mailx/mailx.1.html#16
+http://heirloom.sourceforge.net/mailx/mailx.1.html#30
+https://www.sdaoden.eu/code-nail.html
+
+http://caspian.dotconf.net/menu/Software/SendEmail/
