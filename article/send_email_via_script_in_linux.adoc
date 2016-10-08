@@ -1,9 +1,30 @@
 https://en.wikipedia.org/wiki/Mailx[mailx - Wikipedia]
 
-. mail 是 Unix 1st Edition 和后续版本直到 System Ⅴ 的 MUA。
-. Mail 是 Kurt Shoens 於 1978 年写的 Berkeley Mail。
-. mailx 是 System Ⅴ Release 3 基于 Berkeley Mail 的衍生品。
-. nail 是 2006 年 3 月 之前 Heirloom mailx 的名字，后来合并到 Heirloom 项目
+[source,console]
+.CentOS 6 下的 mailx-12.4-8.el6_6.x86_64
+----
+# » rpm -q mailx
+mailx-12.4-8.el6_6.x86_64
+
+# » rpm -ql mailx
+/bin/mail // <1>
+/bin/mailx // <2>
+/etc/mail.rc
+/usr/bin/Mail // <3>
+/usr/bin/nail // <4>
+/usr/share/doc/mailx-12.4
+/usr/share/doc/mailx-12.4/AUTHORS
+/usr/share/doc/mailx-12.4/COPYING
+/usr/share/doc/mailx-12.4/README
+/usr/share/man/man1/Mail.1.gz
+/usr/share/man/man1/mail.1.gz
+/usr/share/man/man1/mailx.1.gz
+/usr/share/man/man1/nail.1.gz
+----
+<1> mail 是 Unix 1st Edition 和后续版本直到 System Ⅴ 的 MUA。
+<2> Mail 是 Kurt Shoens 於 1978 年写的 Berkeley Mail。
+<3> mailx 是 System Ⅴ Release 3 基于 Berkeley Mail 的衍生品。
+<4> Heirloom mailx 2006 年 3 月之前在 nail 名下开发，后来合并到 Heirloom 项目。
 
 现在 Linux 发行版中 mailx 都是 Heirloom mailx，是 Berkeley Mail 的衍生品。自从 mailx 10 以来独立实现 System Ⅴ 和 POSIX mailx additions 的特性。
 所以在 RHEL 5 中使用 nail，RHEL 6 下是 mailx-12.4，可以使用远程的 MTA，而且 nail 包也已经被废弃，直接使用 mailx 即可。
