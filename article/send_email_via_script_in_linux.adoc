@@ -1,10 +1,36 @@
 https://en.wikipedia.org/wiki/Mailx[mailx - Wikipedia]
 
 [source,console]
-.CentOS 6 下开源的 Heirloom mailx， mailx-12.4-8.el6_6.x86_64
+.CentOS 6 下开源的 Heirloom mailx
 ----
-# » rpm -q mailx
-mailx-12.4-8.el6_6.x86_64
+# » rpm -qi mailx
+Name        : mailx                        Relocations: (not relocatable)
+Version     : 12.4                              Vendor: CentOS
+Release     : 8.el6_6                       Build Date: Wed 17 Dec 2014 02:57:23 AM CST
+Install Date: Sat 01 Oct 2016 03:20:39 PM CST      Build Host: c6b8.bsys.dev.centos.org
+Group       : Applications/Internet         Source RPM: mailx-12.4-8.el6_6.src.rpm
+Size        : 462578                           License: BSD with advertising and MPLv1.1
+Signature   : RSA/SHA1, Wed 17 Dec 2014 04:39:47 AM CST, Key ID 0946fca2c105b9de
+Packager    : CentOS BuildSystem <http://bugs.centos.org>
+URL         : http://heirloom.sourceforge.net/mailx.html
+Summary     : Enhanced implementation of the mailx command
+Description :
+Mailx is an enhanced mail command, which provides the functionality
+of the POSIX mailx command, as well as SysV mail and Berkeley Mail
+(from which it is derived).
+
+Additionally to the POSIX features, mailx can work with Maildir/ e-mail
+storage format (as well as mailboxes), supports IMAP, POP3 and SMTP
+procotols (including over SSL) to operate with remote hosts, handles mime
+types and different charsets. There are a lot of other useful features,
+see mailx(1).
+
+And as its ancient analogues, mailx can be used as a mail script language,
+both for sending and receiving mail.
+
+Besides the "mailx" command, this package provides "mail" and "Mail"
+(which should be compatible with its predecessors from the mailx-8.x source),
+as well as "nail" (the initial name of this project).
 
 # » rpm -ql mailx
 /bin/mail // <1>
