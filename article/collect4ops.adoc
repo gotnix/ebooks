@@ -1,4 +1,5 @@
 == 其他人收集的资料
+* https://github.com/showcases/devops-tools[Github 上 DevOps 工具排名]
 * https://github.com/sindresorhus/awesome[Awesome 列表的策划清单]
 * https://github.com/geekwolf/sa-scripts/blob/master/devops.md[国内运维收集的常用工具]
 * https://github.com/kahun/awesome-sysadmin[大而全的 SA 工具集列表]
@@ -43,3 +44,15 @@
 
 == 社区文化
 * https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way[提問的智慧]
+
+== 性能监控
+* http://www.infoq.com/cn/news/2015/12/linux-performance[用十条命令在一分钟内检查Linux服务器性能]
+* http://www.brendangregg.com/USEmethod/use-linux.html[USE Method: Linux Performance Checklist]，上一个链接提到了 USE 方法，Brendan D. Gregg 提供的 Linux 检查清单
+* sysdig，我觉得 sysdig 方便的地方在于可以通过进程名字去跟踪某些资源消耗，大大提高了用户友好程度。
+** http://blog.jobbole.com/93076/[像 Boss 一样用 sysdig 来排查问题]
+** http://www.csdn.net/article/2015-11-08/2826147[容器周边开源工具新秀：Sysdig和Calico]
+** http://xmodulo.com/monitor-troubleshoot-linux-server-sysdig.html[How to monitor and troubleshoot a Linux server using sysdig]
+* Collectl，号称 sar 的替代工具，目前来看只能代替 sar 命令本身，pidstat 之类还代替不了。
+** http://www.admin-magazine.com/HPC/Articles/Monitor-Your-Nodes-with-collectl[Monitor Your Nodes with collectl]
+** Collectl 的 http://collectl.sourceforge.net/Data-verbose.html[Verbose Data],《用十条命令在一分钟内检查Linux服务器性能》提到的 `sar -n TCP,ETCP` 和 `collectl --verbose -st --tcpfilt t` 是等价的。
+* https://github.com/firehol/netdata[Github Showcase DevOps tool] 上榜的监控工具，界面很酷炫，nedata 本身占用资源很小，支持的采集的应用也挺丰富。
