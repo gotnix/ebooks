@@ -48,8 +48,8 @@ as well as "nail" (the initial name of this project).
 /usr/share/man/man1/nail.1.gz
 ----
 <1> 原始的 mail 是 Unix 1st Edition 和后续版本直到 System Ⅴ 的 MUA。
-<2> 原始的 Mail 是 Kurt Shoens 於 1978 年写的 Berkeley Mail。
-<3> 原始的 mailx 是 System Ⅴ Release 3 基于 Berkeley Mail 的衍生品。
+<2> 原始的 mailx 是 System Ⅴ Release 3 基于 Berkeley Mail 的衍生品。
+<3> 原始的 Mail 是 Kurt Shoens 於 1978 年写的 Berkeley Mail。
 <4> Heirloom mailx 2006 年 3 月之前在 nail 名下开发，后来合并到 Heirloom 项目。
 
 现在 Linux 发行版中 mailx 都是 Heirloom mailx，是 Berkeley Mail 的衍生品。自从 mailx 10 以来独立实现 System Ⅴ 和 POSIX mailx additions 的特性。
