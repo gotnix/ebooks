@@ -20,7 +20,7 @@ make && make install
 FAQ 里介绍了一个叫 https://github.com/stockrt/nginx2goaccess/raw/master/nginx2goaccess.sh[nginx2goaccess.sh] 的脚本，可以直接把
 Nginx 的 log_format 转换成 GoAccess 的 log-format。我用 GoAccess 之前没看 FAQ，在转换日志格式字符串花了很长时间。
 
-日志格式确认以后，就可以分析日志看报告了，报告的时间粒度默认是以天计算的，可以通过 `--date-spec` 和 `--hour-spec` 选项指定以小时或分钟来显示报告。
+日志格式确认以后，就可以分析日志看报告了，报告的时间粒度有 2 个选项可以调整，`--date-spec` 控制 `Unique visitors` 面板， `--hour-spec` 选项控制 `Visit Times` 面板。
 报告的指标不难懂，GoAccess 的作者在 https://github.com/allinurl/goaccess/issues/314#issuecomment-147155601[What counts as a "hit"? #314] 
 这个 Issue 里回复了 Hits 和 Unique Visit 是怎么统计的。
 
