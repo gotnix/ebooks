@@ -78,7 +78,7 @@ make_resolv_conf(){
 [source,bash]
 ----
 # 关闭用不到的服务
-for serv in iptables ip6tables mdmonitor; do
+for serv in ip6tables iptables iscsi iscsid blk-availability lvm2-monitor mdmonitor postfix; do
   chkconfig --level 2345 ${serv} off
   /etc/init.d/${serv} stop
 done
