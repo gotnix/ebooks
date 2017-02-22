@@ -3,10 +3,10 @@
 [source, bash]
 .编译安装 GoAccess
 ----
-# GoAccess 的 GeoIP 和数据持久化功能的依赖的包
+# GoAccess 的 GeoIP 和数据持久化功能的依赖的包，TokyoCabinet 支持持久化，bzip2 支持 TokyoCabinet 的压缩功能。
 yum -y --disablerepo="*" --enablerepo='epel' --enablerepo='base' \
-	install GeoIP-devel kyotocabinet-devel.x86_64
-
+	install GeoIP-devel.x86_64 tokyocabinet-devel.x86_64 bzip2-devel.x86_64
+	
 # 这一步可选，自定义 x86_64 平台的编译器参数，从 ius 源的 Nginx 里抄过来的
 export CFLAGS='-O2 -g -pipe -Wall -fexceptions -fstack-protector -m64 -mtune=generic'
 
@@ -39,4 +39,4 @@ https://github.com/HackingLab/GoaccessCN[Goaccess中文版HTML报表版]
 
 GoAccess 使用的持久化的库相关信息： 
 
-http://fallabs.com/tokyocabinet/[Tokyo Cabinet] (TC)是上一个版本，网络支持需要 http://fallabs.com/tokyotyrant/[Tokyo Tyrant] (TC)。现在用的是作者开发的是新产品-- http://fallabs.com/kyotocabinet/[Kyoto Cabinet] (KC)，网络接口是 http://fallabs.com/kyototycoon/[Kyoto Tycoon] (KT)。
+http://fallabs.com/tokyocabinet/[Tokyo Cabinet] (TC)是上一个版本，网络支持需要 http://fallabs.com/tokyotyrant/[Tokyo Tyrant] (TC)。现在用的是作者开发的是新产品-- http://fallabs.com/kyotocabinet/[Kyoto Cabinet] (KC)，网络接口是 http://fallabs.com/kyototycoon/[Kyoto Tycoon] (KT)。不知道 GoAccess 为啥使用的还是老产品。
