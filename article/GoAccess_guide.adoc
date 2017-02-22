@@ -3,14 +3,14 @@
 [source, bash]
 .编译安装 GoAccess
 ----
-# GoAccess 的 GeoIP 功能编译依赖的包
+# GoAccess 的 GeoIP 和数据持久化功能的依赖的包
 yum -y --disablerepo="*" --enablerepo='epel' --enablerepo='base' \
-	install GeoIP-devel
+	install GeoIP-devel kyotocabinet-devel.x86_64
 
 # 这一步可选，自定义 x86_64 平台的编译器参数，从 ius 源的 Nginx 里抄过来的
 export CFLAGS='-O2 -g -pipe -Wall -fexceptions -fstack-protector -m64 -mtune=generic'
 
-./configure --enable-geoip --enable-utf8 --with-getline --with-openssl --prefix='/opt/app/goaccess/'
+./configure --enable-geoip --enable-utf8 --with-getline --with-openssl --enable-tcb=btree --prefix='/opt/app/goaccess/'
 
 make && make install
 ----
@@ -31,4 +31,12 @@ Nginx 的 log_format 转换成 GoAccess 的 log-format。我用 GoAccess 之前�
  
 GoAccess 可以分析 Nginx 的 Error Log，自定义一下 log-format 就行了，具体请参考 https://www.webfoobar.com/node/53[Process nginx error logs by GoAccess]
  
-下一步计划测试 GoAccess 的实时分析，看看和 WebSocket 相关的功能怎么用。
+下一步计划测试 GoAccess 的实时分析，看看和 WebSocket 相关的功能怎么用。持久化存储功能，测试持久化存储加实施分析。
+
+参考： 
+
+https://github.com/HackingLab/GoaccessCN[Goaccess中文版HTML报表版]
+
+GoAccess 使用的持久化的库相关信息： 
+
+http://fallabs.com/tokyocabinet/[Tokyo Cabinet] (TC)是上一个版本，网络支持需要 http://fallabs.com/tokyotyrant/[Tokyo Tyrant] (TC)。现在用的是作者开发的是新产品-- http://fallabs.com/kyotocabinet/[Kyoto Cabinet] (KC)，网络接口是 http://fallabs.com/kyototycoon/[Kyoto Tycoon] (KT)。
