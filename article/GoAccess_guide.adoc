@@ -10,9 +10,17 @@ yum -y --disablerepo="*" --enablerepo='epel' --enablerepo='base' \
 # 这一步可选，自定义 x86_64 平台的编译器参数，从 ius 源的 Nginx 里抄过来的
 export CFLAGS='-O2 -g -pipe -Wall -fexceptions -fstack-protector -m64 -mtune=generic'
 
-./configure --enable-geoip --enable-utf8 --with-getline --with-openssl --enable-tcb=btree --prefix='/opt/app/goaccess/'
+./configure --enable-geoip \
+	--enable-utf8 \
+	--with-getline \
+	--with-openssl \
+	--enable-tcb=btree \
+	--prefix='/opt/app/goaccess/'
 
 make && make install
+
+# 创建存放数据文件的目录，默认是 /tmp
+mkdir -p /opt/app/goaccess/var/lib/goaccess/
 ----
 
 使用之前阅读一下 https://goaccess.io/faq[FAQ] 和 https://goaccess.io/man[Man Page]，以免走弯路
