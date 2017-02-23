@@ -3,7 +3,7 @@
 * https://www.cyberciti.biz/open-source/learning-bash-scripting-for-beginners/[《Learning bash scripting for beginners》]
 * http://mingxinglai.com/cn/2013/12/material-of-shell/[《shell脚本学习材料》]
 
-2 在线开源的书：
+2 本开源的在线图书：
 
 * http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html[《BASH Programming - Introduction HOW-TO》] 这本书讲的内容有些特性过时了，不过基础概念永远不过时。
 * https://www.gitbook.com/book/linuxstory/advanced-bash-scripting-guide-in-chinese/details[《高级Bash脚本编程指南》]
