@@ -1,31 +1,24 @@
 图书和网站索引：
-https://www.cyberciti.biz/open-source/learning-bash-scripting-for-beginners/
-《Learning bash scripting for beginners》
 
-http://mingxinglai.com/cn/2013/12/material-of-shell/
-《shell脚本学习材料》
+* https://www.cyberciti.biz/open-source/learning-bash-scripting-for-beginners/[《Learning bash scripting for beginners》]
+* http://mingxinglai.com/cn/2013/12/material-of-shell/[《shell脚本学习材料》]
 
-http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html 这本书有些特性过时了，学基础可以。
-https://www.gitbook.com/book/linuxstory/advanced-bash-scripting-guide-in-chinese/details
-《高级Bash脚本编程指南》
-https://zh-google-styleguide.readthedocs.io/en/latest/google-shell-styleguide/contents/
-《Google 的 Shell 代码风格指南》
+2 在线开源的书：
 
-处理文本文件用 sed、awk，教程看陈皓的就行
-http://coolshell.cn/articles/9104.html 《sed 简明教程》
-http://coolshell.cn/articles/9070.html 《AWK 简明教程》
-https://ia802309.us.archive.org/25/items/pdfy-MgN0H1joIoDVoIC7/The_AWK_Programming_Language.pdf
-《The AWK Programming Language》AWK 的作者写的 AWK 编程的书
+* http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html[《BASH Programming - Introduction HOW-TO》] 这本书讲的内容有些特性过时了，不过基础概念永远不过时。
+* https://www.gitbook.com/book/linuxstory/advanced-bash-scripting-guide-in-chinese/details[《高级Bash脚本编程指南》]
+* https://zh-google-styleguide.readthedocs.io/en/latest/google-shell-styleguide/contents/[《Google 的 Shell 代码风格指南》]
 
-处理 http 接口相关 curl 就行，如果返回的结果是 json，上神器 jq 来处理 json。
+处理文本文件用 cat, cut, sort, uniq, sed, awk，除了 man 文档，陈皓的简明教程也不错（ http://coolshell.cn/articles/9104.html[sed 简明教程]， http://coolshell.cn/articles/9070.html[AWK 简明教程]），AWK 还可以看 AWK 的作者写的 https://ia802309.us.archive.org/25/items/pdfy-MgN0H1joIoDVoIC7/The_AWK_Programming_Language.pdf[《The AWK Programming Language》]，书不厚。
 
-其它工具了找对应的客户端就行了。发邮件用 mailx，如果 mailx 版本在低于 12.4，不能使用远程的邮件服务器，请使用 nail 代替 mail。
+其它工具了找对应的客户端就行了，处理 http 接口相关 curl 就行，如果返回的结果是 json，上神器 jq 来处理 json。发邮件用 mailx，如果 mailx 版本在低于 12.4，不能使用远程的邮件服务器，请使用 nail 代替 mail。
 
 工具类的网站：
 在线 man 文档，Bash 的基本特性和语法看 man 文档应付日常需求足够了。Ubuntu 发行版用的可能是 Dash，请注意区分。
-https://linux.die.net/
-http://man7.org/linux/man-pages/index.html
 
-http://explainshell.com/  解释命令行的网站
-http://www.commandlinefu.com/  常用命令
-http://wiki.bash-hackers.org/ Bash Hackers 维基
+* https://linux.die.net/
+* http://man7.org/linux/man-pages/index.html
+
+* http://explainshell.com/  解释命令行的网站
+* http://www.commandlinefu.com/  常用命令
+* http://wiki.bash-hackers.org/ Bash Hackers 维基
