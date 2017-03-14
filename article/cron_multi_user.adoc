@@ -20,7 +20,7 @@ minute   hour   day   month   day of week   username   command
 SHELL=/bin/bash
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 MAILTO=""
-HOME=/
+HOME=/tmp
 * * * * *  tcpdump  { echo "$(id) AT $(date +\%F_\%T)"; pinky -l tcpdump; } &> /tmp/test.log  // <1>
 ----
 <1> tcpdump 要改下 login shell <<loginsh>>， `usermod -s /bin/false tcpdump`，测试结束改回去， `usermod -s /sbin/nologin tcpdump`。
