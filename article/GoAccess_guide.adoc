@@ -4,6 +4,7 @@
 .编译安装 GoAccess
 ----
 # GoAccess 的 GeoIP 和数据持久化功能的依赖的包，TokyoCabinet 支持持久化，bzip2 支持 TokyoCabinet 的压缩功能。
+# https://goaccess.io/download
 yum -y --disablerepo="*" --enablerepo='epel' --enablerepo='base' \
 	install GeoIP-devel.x86_64 tokyocabinet-devel.x86_64 bzip2-devel.x86_64 \
 	ncurses-devel.x86_64 openssl-devel.x86_64
