@@ -1,6 +1,7 @@
 图书和网站索引：
 
 * https://www.cyberciti.biz/open-source/learning-bash-scripting-for-beginners/[《Learning bash scripting for beginners》]
+* https://liwei.life/category/shell/[穷佐罗的Linux书 - 分类：shell编程]
 * http://mingxinglai.com/cn/2013/12/material-of-shell/[《shell脚本学习材料》]
 
 2 本开源的在线图书：
