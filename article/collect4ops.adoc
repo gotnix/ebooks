@@ -38,7 +38,7 @@
 == 诊断与调试工具
 * http://hushi55.github.io/2014/12/31/byteman[Byteman] jboss 项目下一个跟踪 Java 代码的工具，使用方法类似 Systemtap 之于 Linux Kernel。目测会比 Tomcat 的 JPDA 的速度快很多，只支持 Hotspot 和 JRockit 的 JVM。 http://byteman.jboss.org/downloads[下载Byteman]
 * Java 或其它程序的内存泄漏： 
-** 最向往当然是 http://www.brendangregg.com/FlameGraphs/memoryflamegraphs.html[Brendan Gregg 的火焰图]，可惜我还没学会。
+** 最向往的方法当然是使用 http://www.brendangregg.com/FlameGraphs/memoryflamegraphs.html[Brendan Gregg 的火焰图]，可惜我还没学会。
 ** https://github.com/jemalloc/jemalloc/wiki/Use-Case%3A-Leak-Checking[使用 jemalloc 的 jeprof] +
 https://gdstechnology.blog.gov.uk/2015/12/11/using-jemalloc-to-get-to-the-bottom-of-a-memory-leak/[Using jemalloc to get to the bottom of a memory leak], 问题是 Java 程序的 `rsz` （`ps -o rsz,command -p ${PID}`）远远大于 JVM 的 `-Xmx`, 除了 Java 程序本身的问题，大部分讨论结果还认为是 glibc 的 BUG，（比如: http://stackoverflow.com/a/28935232/1699746[Troubleshooting unbounded Java Resident Set Size(RSS) growth], https://plumbr.eu/blog/memory-leaks/why-does-my-java-process-consume-more-memory-than-xmx[Why does my Java process consume more memory than Xmx?], 测试比较全面的是这篇 http://blog.2baxb.me/archives/918[记一次java native memory增长问题的排查], 参考资料也很完善，和我遇到的问题基本一样）我认为比较彻底的诊断方法就是用 jemalloc 代替 glibc 来分配系统内存，然后通过 jemalloc 的工具分析内存问题。还有一篇，解决同样问题的类似工具的对比, https://hardcodejavadog.blogspot.com/2015/02/comparing-java-off-heap-memory.html[Comparing Java off-heap memory allocators], 另一篇相关的博文，作者还在 gdstechnology 留言了， http://www.evanjones.ca/java-native-leak-bug.html[Debugging Java Native Memory Leaks] 。
 ** https://developers.redhat.com/blog/2014/08/14/find-fix-memory-leaks-java-application/[How to find and fix memory leaks in your Java application]
