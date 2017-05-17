@@ -1,0 +1,88 @@
+== 处理 Java 内存泄漏
+
+=== 背景
+最近有 Java 的应用出现了内存泄漏，最直接的现象就是 `ps -o rsz -p ${PID}` 看到的内存大于 `-Xmx` 分配给 JVM 的内存。解决这个问题的方向就是看看是谁分配了内存不释放。大体过程请参考 http://www.evanjones.ca/java-native-leak-bug.html[Debugging Java Native Memory Leaks] ，过程中遇到的具体问题在下面细说。
+
+想了一下还是不说了，把下面的链接的文章，以及文章中链接的文章仔细过一遍就行了。
+
+内存泄漏和 Heap Profile 相关工具：
+
+* https://github.com/gperftools/gperftools/wiki[Home · gperftools/gperftools Wiki]
+* https://github.com/jemalloc/jemalloc/wiki/Use-Case%3A-Leak-Checking[Use Case: Leak Checking · jemalloc/jemalloc Wiki]
+* https://github.com/jemalloc/jemalloc/wiki/Getting-Started[Getting Started · jemalloc/jemalloc Wiki] => http://jemalloc.net/jemalloc.3.html#tuning[JEMALLOC] => http://jemalloc.net/jemalloc.3.html#mallctl_namespace[MALLCTL NAMESPACE] 
+
+查看代码路径以及生成火焰图的工具：
+[NOTE]
+====
+[quote, Brendan Gregg]
+______
+If you've never used perf_events before, you may want to test before production use (it has had kernel panic bugs in the past). My experience has been a good one (no panics).
+______
+====
+
+* http://www.brendangregg.com/flamegraphs.html[Flame Graphs|火焰图]
+* http://www.brendangregg.com/perf.html[Linux perf Example]
+* http://www.brendangregg.com/blog/2015-11-06/java-mixed-mode-flame-graphs.html[Java Mixed-Mode Flame Graphs at Netflix, JavaOne 2015]
+* https://medium.com/netflix-techblog/java-in-flames-e763b3d32166[Java in Flames]
+
+[TIP]
+====
+想同时看 Java 代码和系统调用的 Profiling，`perf-map-agent` 是必须的，详情请看上面列表中的《Java Mixed-Mode Flame Graphs at Netflix, JavaOne 2015》或者《Java in Flames》。
+====
+
+
+=== 我的生成火焰图步骤
+
+配置 Java 环境，跑个 Tomcat 用来测试，结果如下：
+[source, console]
+.JVM 和 Tomcat 版本信息
+----
+# ./catalina.sh version
+Using CATALINA_BASE:   /opt/app/tomcat8u5_8080
+Using CATALINA_HOME:   /opt/app/tomcat8u5_8080
+Using CATALINA_TMPDIR: /opt/app/tomcat8u5_8080/temp
+Using JRE_HOME:        /opt/app/jdk
+Using CLASSPATH:       /opt/app/tomcat8u5_8080/bin/bootstrap.jar:/opt/app/tomcat8u5_8080/bin/tomcat-juli.jar
+Using CATALINA_PID:    /opt/app/tomcat8u5_8080/work/tomcat.pid
+Server version: Apache Tomcat/8.5.14
+Server built:   Apr 13 2017 12:55:45 UTC
+Server number:  8.5.14.0
+OS Name:        Linux
+OS Version:     2.6.32-642.1.1.el6.x86_64
+Architecture:   amd64
+JVM Version:    1.8.0_131-b11
+JVM Vendor:     Oracle Corporation
+----
+
+[source, bash]
+.安装相关工具，并生成火焰图
+----
+# 安装依赖的工具
+yum -y install perf gcc-c++ cmake git
+
+# 下载、构建 perf-map-agent
+mkdir /opt/app/jrudolph/ && cd /opt/app/jrudolph/
+git clone --depth=1 https://github.com/jrudolph/perf-map-agent
+cd perf-map-agent
+cmake . -DCMAKE_C_FLAGS="-m64 -mtune=generic" \
+	-DCMAKE_C_FLAGS="-m64 -mtune=generic" \
+	-DCMAKE_BUILD_TYPE="RelWithDebInfo"
+make -o 2 -j 2
+
+# 下载生成火焰图的工具
+mkdir /opt/app/brendangregg && cd /opt/app/brendangregg
+git clone --depth=1 https://github.com/brendangregg/FlameGraph
+
+# 修改 Java 配置，需要 JDK8 update 60 build 19 及更新版本，只启用第一个选项就够了
+-XX:+PreserveFramePointer -XX:+UnlockDiagnosticVMOptions -XX:+DebugNonSafepoints
+
+# perf-map-agent 选项
+export FLAMEGRAPH_DIR='/opt/app/brendangregg/FlameGraph' \
+	PERF_RECORD_SECONDS=45 \
+	PERF_FLAME_OPTS='--color=java' \
+	PERF_JAVA_TMP='/tmp/java_perf'
+mkdir /tmp/java_perf/
+
+# 创建火焰图
+/opt/app/jrudolph/perf-map-agent/bin/perf-java-flames $(cat /opt/app/tomcat8u5_8080/work/tomcat.pid)
+----
