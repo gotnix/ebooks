@@ -14,8 +14,12 @@
 
 其它工具了找对应的客户端就行了，处理 http 接口相关 curl 就行，如果返回的结果是 json，上神器 jq 来处理 json。发邮件用 mailx，如果 mailx 版本在低于 12.4，不能使用远程的邮件服务器，请使用 nail 代替 mail。
 
-工具类的网站，在线 man 文档：
+提升 Bash 脚本质量的文章：
 
+* http://blog.jobbole.com/111514/[Linux 中高效编写 Bash 脚本的 10 个技巧] `set -o nounset` 是个好办法。
+* http://blog.jobbole.com/15668/[写出健壮的Bash脚本] 内容和上一篇查不对，不同的是介绍怎么利用信号。
+
+工具类的网站，在线 man 文档：
 
 TIP: Bash 的基本特性和语法看 man 文档应付日常需求足够了。Ubuntu 发行版用的可能是 Dash，请注意区分。
 
