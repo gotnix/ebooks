@@ -1,10 +1,10 @@
-图书和网站索引：
+== 图书和网站索引：
 
 * https://www.cyberciti.biz/open-source/learning-bash-scripting-for-beginners/[《Learning bash scripting for beginners》]
 * https://liwei.life/category/shell/[穷佐罗的Linux书 - 分类：shell编程]
 * http://mingxinglai.com/cn/2013/12/material-of-shell/[《shell脚本学习材料》]
 
-2 本开源的在线图书：
+== 2 本开源的在线图书：
 
 * http://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO.html[《BASH Programming - Introduction HOW-TO》] 这本书讲的内容有些特性过时了，不过基础概念永远不过时。
 * https://www.gitbook.com/book/linuxstory/advanced-bash-scripting-guide-in-chinese/details[《高级Bash脚本编程指南》]
@@ -14,12 +14,12 @@
 
 其它工具了找对应的客户端就行了，处理 http 接口相关 curl 就行，如果返回的结果是 json，上神器 jq 来处理 json。发邮件用 mailx，如果 mailx 版本在低于 12.4，不能使用远程的邮件服务器，请使用 nail 代替 mail。
 
-提升 Bash 脚本质量的文章：
+== 提升 Bash 脚本质量的文章：
 
 * http://blog.jobbole.com/111514/[Linux 中高效编写 Bash 脚本的 10 个技巧] `set -o nounset` 是个好办法。
-* http://blog.jobbole.com/15668/[写出健壮的Bash脚本] 内容和上一篇查不对，不同的是介绍怎么利用信号。
+* http://blog.jobbole.com/15668/[写出健壮的Bash脚本] 内容和上一篇差不多，不同的是介绍了怎么利用信号。
 
-工具类的网站，在线 man 文档：
+== 工具类的网站，在线 man 文档：
 
 TIP: Bash 的基本特性和语法看 man 文档应付日常需求足够了。Ubuntu 发行版用的可能是 Dash，请注意区分。
 
