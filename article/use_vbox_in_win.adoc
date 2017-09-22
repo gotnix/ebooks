@@ -108,6 +108,9 @@ dmidecode gcc gcc-c++ iftop iotop iptraf jemalloc-devel.x86_64 ldns libaio-devel
 lrzsz lsof make man mlocate nc ncurses-devel.x86_64 nmap nmon openssh-clients pigz qperf \
 sysstat.x86_64 tcpdump tmux tree unzip vim-enhanced wget wqy-zenhei-fonts-common.noarch \
 wqy-zenhei-fonts.noarch xorg-x11-fonts-75dpi xorg-x11-xauth.x86_64 xterm xz
+
+# 自定义 Bash 环境
+wget -c -O /etc/profile.d/bashrc_local.sh 'https://gist.github.com/gotnix/6896891/raw/4069ea07cdfc0f3703c2a30eae5288d6f682a3c5/bash.bashrc.local'
 # 清理日志
 find /var/log/ -type f | xargs -t -I {f} rm -f {f}
 # 清除命令历史记录
