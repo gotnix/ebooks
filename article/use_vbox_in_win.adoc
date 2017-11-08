@@ -107,7 +107,7 @@ yum -y install autoconf automake bind-utils bison.x86_64 cmake collectl curl dmi
 iftop iotop ipmitool iptraf jemalloc-devel.x86_64 ldns libaio-devel.x86_64 libtool-ltdl-devel.x86_64 \
 lrzsz lsof make man mlocate mtr nc ncurses-devel.x86_64 nload nmap nmon OpenIPMI openssh-clients \
 pciutils pigz powertop qperf sdparm smartmontools sysstat tcpdump tmux tree unzip usbutils vim-enhanced \
-wget wqy-zenhei-fonts-common.noarch wqy-zenhei-fonts.noarch xorg-x11-fonts-75dpi xorg-x11-xauth xterm xz
+wget wqy-zenhei-fonts.noarch xorg-x11-fonts-75dpi xorg-x11-xauth xterm xz
 
 # 自定义 Bash 环境
 wget -c -O /etc/profile.d/bashrc_local.sh \
