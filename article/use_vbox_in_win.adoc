@@ -105,9 +105,9 @@ Kernel 升级过了，把旧版本的卸载掉（`rpm -e` 就能搞定），省�
 # 安装常用的工具
 yum -y install autoconf automake bind-utils bison.x86_64 cmake collectl curl dmidecode fping gcc gcc-c++ \
 htop iftop iotop ipmitool iptraf jemalloc-devel.x86_64 ldns libaio-devel.x86_64 libtool-ltdl-devel.x86_64 \
-lrzsz lsof make man mlocate mtr nc ncurses-devel.x86_64 nload nmap nmon OpenIPMI openssh-clients \
+lrzsz lsof make man mlocate mtr nasm nc ncurses-devel.x86_64 nload nmap nmon OpenIPMI openssh-clients \
 pciutils perf pigz powertop qperf sdparm smartmontools strace sysstat tcpdump tmux tree unzip usbutils \
-vim-enhanced wget wqy-zenhei-fonts.noarch xorg-x11-fonts-75dpi xorg-x11-xauth xterm xz
+vim-enhanced wget wqy-zenhei-fonts.noarch xorg-x11-fonts-75dpi xorg-x11-xauth xterm xz yasm
 
 # 自定义 Bash 环境
 wget -c -O /etc/profile.d/bashrc_local.sh \
