@@ -110,8 +110,8 @@ pciutils perf pigz powertop qperf sdparm smartmontools strace sysstat tcpdump tm
 vim-enhanced wget wqy-zenhei-fonts.noarch xorg-x11-fonts-75dpi xorg-x11-xauth xterm xz yasm
 
 # 自定义 Bash 环境
-wget -c -O /etc/profile.d/bashrc_local.sh \
-  'https://gist.github.com/gotnix/6896891/raw/4069ea07cdfc0f3703c2a30eae5288d6f682a3c5/bash.bashrc.local'
+curl -o /etc/profile.d/bashrc_local.sh \
+  'https://gist.githubusercontent.com/gotnix/6896891/raw/d9e2f84bd698be16e392d711faddf27c0b6867fc/bash.bashrc.local'
 # 清理日志
 find /var/log/ -type f | xargs -t -I {f} rm -f {f}
 # 清除命令历史记录
