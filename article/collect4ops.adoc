@@ -6,6 +6,13 @@
 * https://github.com/kahun/awesome-sysadmin[大而全的 SA 工具集列表]
 * https://github.com/vhf/free-programming-books[免费的编程书]
 
+== 基础服务
+=== CI/CD 系统
+* Pinterrest teletraan
+* NetFlix Spinnake, Bake, Artifactory
+* ThoughtWorks GoCD
+* Linkedin Glu
+* Caps
 
 == 数据库相关
 * https://www.percona.com/docs/wiki/index.html[Percona 文档]
