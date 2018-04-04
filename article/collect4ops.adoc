@@ -9,10 +9,25 @@
 == 基础服务
 === CI/CD 系统
 * Pinterrest teletraan
-* NetFlix Spinnake, Bake, Artifactory
 * ThoughtWorks GoCD
 * Linkedin Glu
 * Caps
+
+* https://blog.coding.net/author/thefallentree[Google 前 SRE 孙宇聪介绍 Google 相关技术的方案]
+** https://blog.coding.net/blog/architecture-concept-and-practice-from-Google[来自 Google 的高可用架构理念与实践]
+** https://blog.coding.net/blog/docker-and-trend-of-technology-architecture-of-Coding[Docker 技术与 Coding.net 技术架构的变迁]
+** https://blog.coding.net/blog/human-tech-procedure[Coding 孙宇聪：《人，技术与流程》]
+
+* http://www.yunweipai.com/archives/24385.html[Netflix、Oracle、ING、思科、JFrog都如何做DevOps的？]
+* http://www.yunweipai.com/archives/24318.html[DevOps落地三部曲：如何归责？用啥工具？往哪里去？]
+* http://devopsone.cn/archives/208[数据驱动 DevOps 的案例和落地方法]
+* http://www.10tiao.com/html/770/201709/2650585444/1.html[思科的5人DevOps 团队是如何打造千万工件级别，5中心持续交付平台的？]
+
+* NetFlix Spinnake, Bake, Artifactory
+** https://medium.com/netflix-techblog/how-we-build-code-at-netflix-c5d9bd727f15[How We Build Code at Netflix]
+** https://medium.com/@Netflix_Techblog/global-continuous-delivery-with-spinnaker-2a6896c23ba7[Global Continuous Delivery with Spinnaker]
+** http://developers.googleblog.cn/2017/06/spinnaker-10.html[Spinnaker 1.0：持续的云交付平台]
+** https://cloud.tencent.com/developer/article/1010559[初试 Netflix 开源持续云交付平台 Spinnaker]
 
 == 数据库相关
 * https://www.percona.com/docs/wiki/index.html[Percona 文档]
