@@ -7,3 +7,4 @@ https://weibo.com/1401880315/E1G3VEoXo
  - http://www.innomysql.com/galera%E5%B0%86%E6%AD%BB-mysql-group-replication%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83/[Galera将死——MySQL Group Replication正式发布]
  - http://www.innomysql.com/mysql-group-replication%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95%EF%BC%8C%E6%98%9F%E8%BE%B0%E5%A4%A7%E6%B5%B7%E8%BF%98%E6%98%AF%E5%89%8D%E8%B7%AF%E8%8C%AB%E8%8C%AB%EF%BC%9F/[MySQL Group Replication性能测试，星辰大海还是前路茫茫？]
  - http://www.innomysql.com/mysql-group-replication/[改朝换代：MySQL Group Replication]
+ - http://www.10tiao.com/html/188/201612/2650272391/1.html[MySQL Group Replication 学习笔记]
