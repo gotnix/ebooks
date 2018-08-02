@@ -29,6 +29,13 @@
 ** http://developers.googleblog.cn/2017/06/spinnaker-10.html[Spinnaker 1.0：持续的云交付平台]
 ** https://cloud.tencent.com/developer/article/1010559[初试 Netflix 开源持续云交付平台 Spinnaker]
 
+* Docker 容器相关
+** https://mp.weixin.qq.com/s/nHs54JuL26F7UFMHyjrOGg[持续集成与持续部署宝典Part 1：将构建环境容器化] --By RancherLabs
+** https://mp.weixin.qq.com/s/5Uo32LQvKLDisy86Cq38iQ[持续集成与持续部署宝典Part 2：创建持续集成流水线] --By RancherLabs
+** https://mp.weixin.qq.com/s/iWuryh9Z_Y-XzuhhBxPQPA[持续集成与持续部署宝典Part 3：创建集成环境] --By RancherLabs
+** https://mp.weixin.qq.com/s/GkerAO0uxy1LZCnP7i1dRg[持续集成与持续部署宝典Part 4：创建持续部署流水线] --By RancherLabs
+
+
 == 数据库相关
 * https://www.percona.com/docs/wiki/index.html[Percona 文档]
 
