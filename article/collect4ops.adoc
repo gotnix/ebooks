@@ -65,12 +65,12 @@
 * https://blog.cloudflare.com/tag/tls/[CloudFlaer 的 TLS 文章]
 
 == 诊断与调试工具
-* Java 平台跟踪工具
-** https://github.com/btraceio/btrace[BTrace]
-** http://byteman.jboss.org/[Byteman]
-** https://github.com/oldmanpushcart/greys-anatomy[Greys-Anatomy]
+* Java 诊断、跟踪工具
 ** https://alibaba.github.io/arthas/[alibaba/Arthas（阿尔萨斯）]
 ** https://github.com/alibaba/TProfiler[alibaba/TProfiler]
+** https://github.com/oldmanpushcart/greys-anatomy[Greys-Anatomy]
+** https://github.com/btraceio/btrace[BTrace]
+** http://byteman.jboss.org/[Byteman]
 ** 一些例子：
 *** http://codepub.cn/2017/09/22/btrace-uses-tutorials/[BTrace 使用教程]
 *** https://www.libereco.cn/posts/java/2017/09/20/btrace-greys/[Java问题排查利器(从Btrace到Greys)]
