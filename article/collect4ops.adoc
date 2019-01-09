@@ -65,7 +65,16 @@
 * https://blog.cloudflare.com/tag/tls/[CloudFlaer 的 TLS 文章]
 
 == 诊断与调试工具
-* http://hushi55.github.io/2014/12/31/byteman[Byteman] jboss 项目下一个跟踪 Java 代码的工具，使用方法类似 Systemtap 之于 Linux Kernel。目测会比 Tomcat 的 JPDA 的速度快很多，只支持 Hotspot 和 JRockit 的 JVM。 http://byteman.jboss.org/downloads[下载Byteman]
+* Java 平台跟踪工具
+** https://github.com/btraceio/btrace[BTrace]
+** http://byteman.jboss.org/[Byteman]
+** https://github.com/oldmanpushcart/greys-anatomy[Greys-Anatomy]
+** https://alibaba.github.io/arthas/[alibaba/Arthas（阿尔萨斯）]
+** https://github.com/alibaba/TProfiler[alibaba/TProfiler]
+** 一些例子：
+*** http://codepub.cn/2017/09/22/btrace-uses-tutorials/[BTrace 使用教程]
+*** https://www.libereco.cn/posts/java/2017/09/20/btrace-greys/[Java问题排查利器(从Btrace到Greys)]
+
 * Java 或其它程序的内存泄漏： 
 ** 最向往的方法当然是使用 http://www.brendangregg.com/FlameGraphs/memoryflamegraphs.html[Brendan Gregg 的火焰图]，可惜我还没学会。
 ** https://github.com/jemalloc/jemalloc/wiki/Use-Case%3A-Leak-Checking[使用 jemalloc 的 jeprof] +
