@@ -111,7 +111,7 @@ vim-enhanced wget wqy-zenhei-fonts.noarch xorg-x11-fonts-75dpi xorg-x11-xauth xt
 
 # 自定义 Bash 环境
 curl -o /etc/profile.d/bashrc_local.sh \
-  'https://gist.githubusercontent.com/gotnix/6896891/raw/4b2873b47344137dc38cd0b016ad770e5239e44c/bash.bashrc.local'
+  'https://gist.githubusercontent.com/gotnix/6896891/raw/c5c7ab85ce706ccd02a6c329248180086c4a2e4b/bash.bashrc.local'
 # 清理日志
 find /var/log/ -type f | xargs -t -I {f} rm -f {f}
 # 清除命令历史记录
