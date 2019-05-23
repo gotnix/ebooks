@@ -5,6 +5,8 @@
 == 疑问
 CentOS 6 和 7 两个版本默认都设置了 `vm.zone_reclaim_mode = 0`，但是内存的 numa 分配策略是默认的情况下，还是会出现分配不均衡的情况，CPU0 剩余 300M 内存，CPU1 还剩 30G 的内存就已经刷了很多 swap 了，那位知道原因请提 issue，感谢！
 
+貌似没有十全十美的解决方案，只是降低了使用 swap 的可能性，比如使用 memlock 需要以 root 身份运行 mysqld， https://dev.mysql.com/doc/refman/5.6/en/large-page-support.html[8.12.4.2 Enabling Large Page Support] 说可以通过 `ulimit -l unlimited` 解决； HugePages 可能会导致其它问题， http://cenalulu.github.io/linux/huge-page-on-numa/[Huge Page 是否是拯救性能的万能良药？]
+
 == 修改 mysqld 内存分布策略的脚本
 [source,bash]
 ./opt/app/mysql5/bin/mysqld_numa
