@@ -1,0 +1,59 @@
+= 修改 MySQL 的 numa 内存分配策略
+
+出现这个问题的原因和解决方案网上已经出现很久了，这里就不写了，文末的参考链接里有很详细的介绍，只写一下我的处理方法和疑问。
+
+== 疑问
+CentOS 6 和 7 两个版本默认都设置了 `vm.zone_reclaim_mode = 0`，但是内存的 numa 分配策略是默认的情况下，还是会出现分配不均衡的情况，CPU0 剩余 300M 内存，CPU1 还剩 30G 的内存就已经刷了很多 swap 了，那位知道原因请提 issue，感谢！
+
+== 修改 mysqld 内存分布策略的脚本
+[source,bash]
+./opt/app/mysql5/bin/mysqld_numa
+----
+#!/bin/bash
+#
+set -o nounset
+
+MYSQLD_CMD='/opt/app/mysql8/bin/mysqld'
+NUMACTL_CMD='/usr/bin/numactl'
+NUMACTL_OPTS='--interleave=all'
+
+printf "%s\n" "${NUMACTL_CMD} ${NUMACTL_OPTS} ${MYSQLD_CMD} $@"
+exec "${NUMACTL_CMD}" "${NUMACTL_OPTS}" "${MYSQLD_CMD}" "$@"
+----
+
+TIP: `numactl --interleave=all` 是要加到 mysqld 前面的，之前犯傻了加到 mysqld_safe 上了，测了半天不管用。 +
+脚本已经要有可执行权限： `chmod +x /opt/app/mysql5/bin/mysqld_numa` 。
+
+MySQL 5.5.54、5.6.36、5.7.18 和 8.0.1 之前的版本可以在 `my.cnf` 中指定启动脚本，配置如下：
+[source, ini]
+.my.cnf
+----
+[mysqld_safe]
+……
+ledir = /opt/app/mysql56/bin
+mysqld = mysqld_numa
+----
+
+从 MySQL 5.5.54、5.6.36、5.7.18 和 8.0.1 开始，不支持在配置文件中定义 `ledir` 和 `mysqld` 选项，只能通过命令行参数使用自定义脚本：`/opt/app/mysql8/share/mysql/mysql.server start --ledir=/opt/app/mysql8/bin --mysqld=mysqld_numa` 。
+
+查看 mysqld 进程的 numa 策略：
+[source, bash]
+----
+for i in $(pgrep -x mysqld)
+do
+    echo "----[ ${i} ]----"
+    head /proc/"${i}"/numa_maps
+done
+----
+
+如果能看到 `interleave:0-1`，说明 NUMA 内存分配策略符合 `--interleave=all` ，服务器只有 2 个 CPU，0-1 就是所有的 CPU；默认是 `default` 。
+
+== 参考链接
+- http://cenalulu.github.io/linux/numa/[NUMA架构的CPU -- 你真的用好了么？]  Facebook DBA 出品，原因和解决方案都很详细，还 YY 了更好的解决方案。
+- http://mysql.taobao.org/monthly/2015/07/06/[数据库内核月报 － 2015 / 07]  淘宝的月报，给出了代码层面的解决方案，文中提到的 `innodb_numa_interleave` 参数现在已经废弃了。
+- http://www.penglixun.com/tech/database/mysql_multi_using_numactl.html[在NUMA处理器绑定多实例到固定核心] 我的启动脚本参考了这篇文章
+- https://dev.mysql.com/doc/refman/5.5/en/mysqld-safe.html#option_mysqld_safe_ledir[mysqld_safe — MySQL Server Startup Script] mysqld_safe 脚本的参数，这里说 “As of MySQL 5.5.54, this option is accepted only on the command line, not in option files.”
+- https://dev.mysql.com/doc/relnotes/mysql/5.5/en/news-5-5-55.html[Changes in MySQL 5.5.55 (2017-04-10, General availability)] Changes made to mysqld_safe in recent MySQL releases require the https://dev.mysql.com/doc/refman/5.5/en/mysqld-safe.html#option_mysqld_safe_ledir[--ledir], https://dev.mysql.com/doc/refman/5.5/en/mysqld-safe.html#option_mysqld_safe_mysqld[--mysqld], https://dev.mysql.com/doc/refman/5.5/en/mysqld-safe.html#option_mysqld_safe_mysqld-version[--mysqld-version] options to be specified on the command line; they can no longer be specified in option files. This could cause failure of init scripts that invoke mysqld_safe. Such scripts now pass the value of the MYSQLD_OPTS environment variable as the first command-line argument to mysqld_safe, with the value set to such command line-only mysqld_safe option values as may be required. On platforms that use systemd, the `MYSQLD_OPTS` value can be set in `/etc/sysconfig/mysqld` with a line such as this: `MYSQLD_OPTS=" --ledir=/mysqld_ledir --mysqld=my_wrapper "`
+- https://dev.mysql.com/doc/relnotes/mysql/5.6/en/news-5-6-36.html[Changes in MySQL 5.6.36 (2017-04-10, General Availability)] 内容同上，参数文档： https://dev.mysql.com/doc/refman/5.6/en/mysqld-safe.html#option_mysqld_safe_ledir[--ledir], https://dev.mysql.com/doc/refman/5.6/en/mysqld-safe.html#option_mysqld_safe_mysqld[--mysqld], https://dev.mysql.com/doc/refman/5.6/en/mysqld-safe.html#option_mysqld_safe_mysqld-version[--mysqld-version]
+- https://dev.mysql.com/doc/relnotes/mysql/5.7/en/news-5-7-18.html[Changes in MySQL 5.7.18 (2017-04-10, General Availability)] 内容同上，参数文档： https://dev.mysql.com/doc/refman/5.7/en/mysqld-safe.html#option_mysqld_safe_ledir[--ledir], https://dev.mysql.com/doc/refman/5.7/en/mysqld-safe.html#option_mysqld_safe_mysqld[--mysqld], https://dev.mysql.com/doc/refman/5.7/en/mysqld-safe.html#option_mysqld_safe_mysqld-version[--mysqld-version]
+- https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-1.html[Changes in MySQL 8.0.1 (2017-04-10, Development Milestone)] 内容同上。参数文档： https://dev.mysql.com/doc/refman/8.0/en/mysqld-safe.html#option_mysqld_safe_ledir[--ledir], https://dev.mysql.com/doc/refman/8.0/en/mysqld-safe.html#option_mysqld_safe_mysqld[--mysqld], https://dev.mysql.com/doc/refman/8.0/en/mysqld-safe.html#option_mysqld_safe_mysqld-version[--mysqld-version]
