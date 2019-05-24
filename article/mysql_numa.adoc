@@ -15,12 +15,28 @@ CentOS 6 和 7 两个版本默认都设置了 `vm.zone_reclaim_mode = 0`，但�
 #
 set -o nounset
 
-MYSQLD_CMD='/opt/app/mysql8/bin/mysqld'
+BASE_DIR='/opt/app/mysql8'
+MYSQLD_CMD="${BASE_DIR}"/bin/mysqld
+PID_FILE="${BASE_DIR}"/var/mysql.pid
+
 NUMACTL_CMD='/usr/bin/numactl'
 NUMACTL_OPTS='--interleave=all'
 
+# 清除文件系统缓存，便于 Innodb_buffer_pool 在启动时就分配完
+sysctl -q -w vm.drop_caches=3
+# 默认就是 0，https://lrita.github.io/2018/06/09/linux-kernel-sysctl-vm/ 有详细介绍
+# sysctl -q -w vm.zone_reclaim_mode=0
+# 适配 memlock 选项
+ulimit -l unlimited
+
 printf "%s\n" "${NUMACTL_CMD} ${NUMACTL_OPTS} ${MYSQLD_CMD} $@"
 exec "${NUMACTL_CMD}" "${NUMACTL_OPTS}" "${MYSQLD_CMD}" "$@"
+
+# 调低 OOM killer 优先级
+if [[ -f ${PID_FILE} && "$(pgrep -F "${PID_FILE}")" -eq "$(pgrep -f "${PID_FILE}" -u mysql)" ]]
+then
+    echo -15 > "/proc/$(pgrep -F "${PID_FILE}")/oom_adj"
+fi
 ----
 
 TIP: `numactl --interleave=all` 是要加到 mysqld 前面的，之前犯傻了加到 mysqld_safe 上了，测了半天不管用。 +
