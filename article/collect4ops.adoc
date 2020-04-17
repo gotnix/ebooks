@@ -11,7 +11,8 @@
 * ThoughtWorks GoCD
 ** 官网: https://www.gocd.org/
 ** GitHub: https://github.com/GoCD/GoCD
-** ThoughtWorks 技术雷达: https://www.thoughtworks.com/radar/tools/gocd
+** GoCD的正确打开方式 - ThoughtWorks 洞见: https://insights.thoughtworks.cn/the-right-interpretation-of-gocd/
+** ThoughtWorks 技术雷达: https://www.thoughtworks.com/cn/radar/tools/gocd
 
 * Pinterrest teletraan
 ** GitHub: https://github.com/pinterest/teletraan
