@@ -20,7 +20,8 @@
 * Linkedin Glu, 不推荐这个
 ** Github: https://github.com/pongasoft/glu
 ** 文档: http://pongasoft.github.io/glu/docs/latest/html/
-* Caps
+* Capistrano
+** Github: https://github.com/capistrano/capistrano
 
 * https://blog.coding.net/author/thefallentree[Google 前 SRE 孙宇聪介绍 Google 相关技术的方案]
 ** https://blog.coding.net/blog/architecture-concept-and-practice-from-Google[来自 Google 的高可用架构理念与实践]
