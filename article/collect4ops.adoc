@@ -8,9 +8,17 @@
 
 == 基础服务
 === CI/CD 系统
-* Pinterrest teletraan
 * ThoughtWorks GoCD
-* Linkedin Glu
+** 官网: https://www.gocd.org/
+** GitHub: https://github.com/GoCD/GoCD
+** ThoughtWorks 技术雷达: https://www.thoughtworks.com/radar/tools/gocd
+
+* Pinterrest teletraan
+** GitHub: https://github.com/pinterest/teletraan
+
+* Linkedin Glu, 不推荐这个
+** Github: https://github.com/pongasoft/glu
+** 文档: http://pongasoft.github.io/glu/docs/latest/html/
 * Caps
 
 * https://blog.coding.net/author/thefallentree[Google 前 SRE 孙宇聪介绍 Google 相关技术的方案]
