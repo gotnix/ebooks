@@ -1,0 +1,130 @@
+= Linux 查找网络带宽使用率高的进程
+Twitter <https://twitter.com/Gotnix[@Gotnix]>
+v0.1, 2023-10-29
+:lang: zh-cmn-Hans
+:doctype: article
+:description: Linux 定位占用带宽的进程
+:keywords: nethogs, SystemTap, nettop
+:icons: font
+:source-highlighter: highlightjs
+:linkcss!:
+:numbered:
+:idprefix:
+:toc: right
+:toclevels: 3
+:experimental:
+:showtitle:
+
+== 方法一、nethogs
+这个方法最简单，但是负载重的情况下 nethogs 会卡死。
+
+[source,bash]
+----
+# 安装 nethogs，一个类似 net top 的工具
+dnf install nethogs
+
+# 查看那个进程使用 eth0 的带宽大
+nethogs eth0
+----
+
+== 方法二、SystemTap 
+SystempTap 的安装和使用请看文档 https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/installing-systemtap_getting-started-with-systemtap[39.2. 安装 SystemTap]。需要启用 Debug Yum 源，CentOS 7 的配置如下。
+
+=== 先决条件
+
+配置 Debug Yum 源
+
+. /etc/yum.repos.d/CentOS-Debuginfo.repo
+[source, bash]
+----
+cat > /etc/yum.repos.d/CentOS-Debuginfo.repo << 'EOF'
+[base-debuginfo]
+name=CentOS-7 - Debuginfo
+baseurl=https://mirrors.aliyun.com/centos-debuginfo/7/$basearch/
+#baseurl=http://debuginfo.centos.org/7/$basearch/
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-Debug-7
+enabled=0
+EOF
+
+yum clean all && yum makecache --enablerepo=base-debuginfo
+----
+
+=== 配置 SystemTap
+安装所需的 SystemTap 软件包 +
+`dnf install systemtap`
+
+安装所需的内核软件包
+
+使用stap-prep： +
+`stap-prep`
+
+如果 stap-prep 无法正常工作，请手动安装所需的内核软件包： +
+`dnf --enablerepo=base-debuginfo install kernel-debuginfo-$(uname -r) kernel-debuginfo-common-$(uname -i)-$(uname -r) kernel-devel-$(uname -r)`
+
+=== 验证步骤
+检查 SystemTap 和 Kernel-Debuginfo 软件包是否正常工作。如果当前使用 SystemTap 探测内核，请检查您的安装是否成功： +
+`stap -v -e 'probe kernel.function("vfs_read") {printf("read performed\n"); exit()}'`
+
+成功 SystemTap 部署会生成类似如下的输出：
+[source, console]
+----
+Pass 1: parsed user script and 45 library script(s) in 340usr/0sys/358real ms.
+Pass 2: analyzed script: 1 probe(s), 1 function(s), 0 embed(s), 0 global(s) in 290usr/260sys/568real ms.
+Pass 3: translated to C into "/tmp/stapiArgLX/stap_e5886fa50499994e6a87aacdc43cd392_399.c" in 490usr/430sys/938real ms.
+Pass 4: compiled C into "stap_e5886fa50499994e6a87aacdc43cd392_399.ko" in 3310usr/430sys/3714real ms.
+Pass 5: starting run. 1
+read performed 2
+Pass 5: run completed in 10usr/40sys/73real ms.
+----
+
+=== 定位问题进程
+`systemtap-client` RPM 包有 `/usr/share/systemtap/examples/network/nettop.stp` 这个脚本，会统计进程的网络使用情况，输出信息有 PID、进程名称和网络流量，但是不够直观，定位问题需要完整的命令行信息，我是通过 awk 根据 PID 查询进程的命令行，（其实是我不会改 nettop.stp 脚本）。
+
+. nettop.awk 源码
+[source,awk]
+----
+# 配合 stap --example nettop.stp 使用
+# stap 脚本只打印了进程名称，awk 负责在 stap 输出的行尾追加
+# 完整的命令行信息。
+
+# !!! awk 脚本过滤了 php 进程。
+
+{
+    # PID 开头的行在末尾追加进程的完整的命令行
+    if(match($1,"[0-9]+") && $NF == "php") {
+        cmdline_path = "/proc/" $1 "/cmdline"
+        getline cmdline < cmdline_path
+        close(cmdline_path)
+
+        # 使用gsub将null字符替换为空格
+        gsub(/\0/, " ", cmdline)
+
+        print $0 " " cmdline
+    }
+    # 标题行末尾追加 "ARGS"
+    else if ($1=="PID") {
+        print $0, "ARGS"
+    }
+}
+----
+
+在流量高峰分析进程，把上面的脚本上传到服务器上，文件名为 `nettop.awk`，配合 `nettop.stp` 使用。
+
+`stap --example nettop.stp | awk -f nettop.awk` ，输出如下：
+[source,console]
+----
+  PID   UID DEV     XMIT_PK RECV_PK XMIT_KB RECV_KB COMMAND         ARGS
+33131  2000 eth0        173      11      67       1 php             /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/a.example.com/index.php BoucheCronOsa handleLog
+28535  2000 eth0         46       5      16       0 php             /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/a.example.com/index.php BoucheCronAdx consumeReport
+33588  2000 eth0         42       1      17       0 php             /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/a.example.com/index.php boucheCron addMobileDownloadToLog 2
+33693  2000 eth0         37       2      13       0 php             /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/a.example.com/index.php boucheCron addYybDownloadToLog 0
+ 1304  2000 eth0         39       0       6       0 php             /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/b.example.com/index.php boucheCron setCdnBandWidth
+33704  2000 eth0         34       3      13       0 php             /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/a.example.com/index.php boucheCron addYybDownloadToLog 1
+33545  2000 eth0         37       0      14       0 php             /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/a.example.com/index.php boucheCron addMobileDownloadToLog 1
+----
+
+如果生产环境的服务器不能安装编译器或调试信息的软件包，请参考 https://access.redhat.com/documentation/zh-cn/red_hat_enterprise_linux/9/html/monitoring_and_managing_system_status_and_performance/cross-instrumentation-of-systemtap_monitoring-and-managing-system-status-and-performance[第 40 章 SystemTap 交叉检测]，可以事先把 SystemTap 脚本编译成内核模块，然后在目标服务器上执行。
+
+== 方法三、 基于 eBPF 的 BBC 工具
+SystemTap 会把 stp 脚本编程内核模块，所以有导致内核崩溃的风险。更安全的方法是使用 https://github.com/iovisor/bcc/blob/master/docs/tutorial.md[BCC 工具]，但是目前有跟踪 tcp 新建、接收、重传的工具，还没有分析网络带宽的工具，只能日后再说。
