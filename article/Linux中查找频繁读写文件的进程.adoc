@@ -1,0 +1,72 @@
+= Linux中查找频繁读写文件的进程
+Twitter <https://twitter.com/Gotnix[@Gotnix]>
+v0.1, 2023-10-29
+:lang: zh-cmn-Hans
+:doctype: article
+:description: Linux 写排查频繁写文件的进程
+:keywords: bcc, filetop, awk
+:icons: font
+:source-highlighter: highlightjs
+:linkcss!:
+:numbered:
+:idprefix:
+:toc: right
+:toclevels: 3
+:experimental:
+:showtitle:
+
+== 背景
+现在有一个日志文件频繁的被写入，成吨的占用磁盘空间和IO。除了知道是 Crontab 执行的 php 脚本干的，没有其它信息了；php 脚本有 200 多个，从脚本入手排查是事倍功半。所以要做的就是通过文件名，找到是哪些进程在写这个文件。
+
+Crontab 执行的 php 脚本基本上都是短命进程，直接试用 lsof 毫无意外的抓不到任何进程。咨询 NewBing 告诉我试用 `inotifywait -m php_errors_cron.log | while read path action; do lsof $path; done`，然后又试用了 `pt-ioprofile --profile-process php --run-time 60 php_errors_cron.log`，都没有什么用，就想试试 BCC tools。
+
+BTW，最近除了 PHP 从 7 升级到 8（日志变大就是因为升级 PHP 版本导致的，改 php 配置文件调整日志级别没有效果，怀疑是业务代码里定义了日志级别），操作系统也从 CentOS 7 升级到 RockLinux 9 ，先拿 BCC tools 尝尝鲜，搞不定了再试试 SystemTap。
+
+== 操作步骤
+
+RockyLinux 9 安装 BCC Tools 很简单，执行 `dnf -y install bcc-tools` 即可。
+
+rpm 包里提供了 `/usr/share/bcc/tools/filetop`，命令行输出不包含命令行参数，只有 PID 和进程名称，还得上 awk。
+
+
+. filetop.awk 源码
+[source,awk]
+----
+# 配合 /usr/share/bcc/tools/filetop -C -s writes | awk -f filetop.awk 使用
+# filetop 脚本只打印了进程名称，awk 负责在 filetop 输出的行尾追加完整的命令行信息。
+# !!! awk 脚本过滤了 php 进程和日志文件名。
+
+{
+    # TID 开头的行在末尾追加进程的完整的命令行
+    if(match($1,"[0-9]+") && $2 == "php" && $NF == "php_errors_cron.log") {
+        cmdline_path = "/proc/" $1 "/cmdline"
+        getline cmdline < cmdline_path
+        close(cmdline_path)
+
+        # 使用gsub将null字符替换为空格
+        gsub(/\0/, " ", cmdline)
+
+        print $0 " " cmdline
+    }
+    # 标题行末尾追加 "ARGS"
+    else if ($1=="TID") {
+        print $0, "ARGS"
+    }
+}
+----
+
+
+`/usr/share/bcc/tools/filetop -C -s writes | awk -f filetop.awk | head` ，输出如下：
+[source,console]
+----
+TID     COMM             READS  WRITES R_Kb    W_Kb    T FILE ARGS
+688832  php              0      149    0       32      R php_errors_cron.log /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/example.com/web/index.php Catcher\FileGenerator run
+688833  php              0      123    0       27      R php_errors_cron.log /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/example.com/web/index.php Catcher\FileGenerator run
+688825  php              0      123    0       27      R php_errors_cron.log /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/example.com/web/index.php Catcher\FileGenerator run
+688829  php              0      120    0       26      R php_errors_cron.log /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/example.com/web/index.php Catcher\FileGenerator run
+688831  php              0      110    0       24      R php_errors_cron.log /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/example.com/web/index.php Catcher\FileGenerator run
+688826  php              0      107    0       23      R php_errors_cron.log /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/example.com/web/index.php Catcher\FileGenerator run
+688828  php              0      107    0       23      R php_errors_cron.log /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/example.com/web/index.php Catcher\FileGenerator run
+688824  php              0      107    0       23      R php_errors_cron.log /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/example.com/web/index.php Catcher\FileGenerator run
+688827  php              0      104    0       22      R php_errors_cron.log /opt/app/php/bin/php -c /opt/app/php/etc/cron.ini /opt/case/example.com/web/index.php Catcher\FileGenerator run
+----
