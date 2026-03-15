@@ -55,7 +55,7 @@
     - [CS61A Online Textbook](http://www-inst.eecs.berkeley.edu/~cs61a/sp12/book/)：伯克利官方早期的在线版本（注：目前(2026/03)该站点需要校方账号登录方可访问）。
     - 离线方案：如需在 Kindle 或移动端阅读，建议从 [安娜的档案](https://zh.annas-archive.gd/md5/d9634d95514062df53cc018bb7f732ff) 获取该书的 Epub 格式进行离线自学。《SICP Python 描述（中文版）》是通过 GitBook 发布的，可以把 [Git 仓库](https://github.com/wizardforcel/sicp-py-zh/blob/master/1.1.md) 克隆到本地阅读 Markdown 文件。
 
-2. 经典原版参考 (Lisp/Scheme 版)
+2. 经典原著参考 (Lisp/Scheme 版)
     - [SICP, 2nd Edition (Official Web)](https://sarabander.github.io/sicp/html/index.xhtml#SEC_Contents)：由 Harold Abelson 等人编写的原著第二版在线 HTML。虽然现代 CS61A 切换到了 Python，但原著关于“抽象”的哲学讨论依然是不可逾越的经典。
 
 3. 辅助工具与工程实践
