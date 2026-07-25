@@ -214,13 +214,14 @@ Bazel 是目前整个软件工程界少有的、能够将多技术栈装进同�
 * **iOS 端**：使用 Xcode 原生构建并搭配 Swift Package Manager (SPM)。
 * **Golang 后端**：直接使用原生原汁原味的 `go build`，或配合轻量的 Makefile / Taskfile 进行任务自动化调度。
 
+
+如果是觉得 Bazel 是 Java 生态的工具太重（ JVM 消耗资源多，Bazel 学习成本高），可以考虑类似 Bazel 的构建工具: [Buck2 © 2026 Meta Platforms](https://buck2.build/) | [Please © 2024 Thought Machine](https://please.build/) | [Pantsbuild © Pants](https://www.pantsbuild.org/)。
+
 ---
 
 ## 五 总结
 
 Siso 的出现标志着 Google 在追求超大型工程编译效能的道路上迈出了新的一步。它通过智能化地与远端分布式 API 交互，成功让 Chromium 这样庞大的工程项目在几分钟内完成编译。但对广大开发者而言，Siso 是一把为 Chromium 和 Android 源码量身定制的特定工具；而在面对包含 Go、移动端双端及 Next.js 等多元化、多技术栈的通用商业项目时，生态繁荣、跨语言接管能力极强的 Bazel 依然是分布式构建领域的行业主流解法。
-
-如果是觉得 Bazel 是 Java 生态的工具太重（ JVM 消耗资源多，Bazel 学习成本高），可以考虑类似 Bazel 的构建工具: [Buck2 © 2026 Meta Platforms](https://buck2.build/) | [Please © 2024 Thought Machine](https://please.build/) | [Pantsbuild © Pants](https://www.pantsbuild.org/)。
 
 ---
 
